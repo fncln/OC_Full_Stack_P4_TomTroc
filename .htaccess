@@ -1,0 +1,11 @@
+# Permet d'ouvrir le site depuis le dossier du projet (ex. http://localhost/tomtroc/)
+# quand le dossier "public" ne peut pas être la racine du serveur (XAMPP, hébergement mutualisé).
+# Toutes les demandes sont envoyées vers "public" : src, config et database restent inaccessibles.
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^$ public/ [L]
+    RewriteRule ^(?!public/)(.*)$ public/$1 [L]
+</IfModule>

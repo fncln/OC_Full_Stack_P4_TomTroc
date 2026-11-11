@@ -1,0 +1,11 @@
+# Les dossiers ne sont pas listés
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Toute adresse qui n'est ni un fichier ni un dossier existant est envoyée au routeur
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
