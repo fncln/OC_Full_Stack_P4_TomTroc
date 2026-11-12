@@ -70,6 +70,21 @@ final class View
     }
 
     /**
+     * Génère l'URL d'un fichier asset (image, CSS, JS) en ciblant 
+     * automatiquement le dossier 'assets/' situé dans le dossier public.
+     * 
+     * @param string $path Le chemin relatif du fichier à partir du dossier assets
+     * @return string L'URL complète de la ressource
+     */
+    public function asset(string $path): string
+    {
+        // On retire les éventuels slashes superflus au début du chemin passé en paramètre,
+        // puis on le concatène proprement après le dossier "assets/"
+        return $this->url('assets/' . ltrim($path, '/'));
+    }
+
+
+    /**
      * Exécute un fichier template et retourne le HTML qu'il produit.
      *
      * @param array<string, mixed> $data
