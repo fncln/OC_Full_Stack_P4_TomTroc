@@ -8,9 +8,10 @@
 ?>
 <header class="site-header">
     <div class="site-header__inner container">
-        <p class="site-header__logo">
-            <a href="<?= $this->escape($this->url('/')) ?>">Tom Troc</a>
-        </p>
+        <a class="site-header__logo" href="<?= $this->escape($this->url('/')) ?>">
+            <img src="<?= $this->escape($this->asset('img/logo-header.svg')) ?>" width="155" height="51"
+                 alt="Tom Troc, retour à l’accueil">
+        </a>
         <nav class="site-nav" aria-label="Navigation principale">
             <ul class="site-nav__list">
                 <li>

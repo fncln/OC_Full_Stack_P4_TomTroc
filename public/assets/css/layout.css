@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Tom Troc - header et footer (présents sur toutes les pages)
+   ========================================================================== */
+
+/* ---- Header ------------------------------------------------------------- */
+
+.site-header {
+    background-color: var(--color-header);
+}
+
+/* Logo à gauche, menu à sa suite, le tout centré verticalement dans les 80 px du header */
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    height: var(--header-height);
+}
+
+.site-header__logo {
+    display: block;
+    flex-shrink: 0;
+    /* Écart de 78 px entre le logo et le premier lien */
+    margin-right: 78px;
+}
+
+.site-header__logo img {
+    width: 155px;
+    height: 51px;
+}
+
+/* Menu : Inter Regular 14 px, gris foncé, espacement des lettres de 2 % */
+.site-nav__list {
+    display: flex;
+    align-items: center;
+    /* Écart de 47 px entre deux liens */
+    gap: 47px;
+}
+
+.site-nav__link {
+    color: var(--color-text);
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+}
+
+.site-nav__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Lien de la page affichée : en gras */
+.site-nav__link.is-active {
+    font-weight: 700;
+}
+
+/* ---- Footer ------------------------------------------------------------- */
+
+.site-footer {
+    flex-shrink: 0;
+    background-color: var(--color-white);
+}
+
+/* Trois textes puis le logo, alignés à droite, sur 61 px de haut */
+.site-footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 40px;
+    min-height: var(--footer-height);
+    padding: 0 47px;
+    color: var(--color-text);
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 15px;
+}
+
+.site-footer__logo {
+    width: 22px;
+    height: 18px;
+}
+
+

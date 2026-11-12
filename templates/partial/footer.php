@@ -10,5 +10,7 @@
         <span>Politique de confidentialité</span>
         <span>Mentions légales</span>
         <span>Tom Troc©</span>
+        <img class="site-footer__logo" src="<?= $this->escape($this->asset('img/logo-footer.svg')) ?>"
+             width="22" height="18" alt="">
     </div>
 </footer>
