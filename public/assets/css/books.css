@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Tom Troc - page "Nos livres à l'échange" et cartes de livres
+   Mesures issues de la maquette : cartes de 200 px, 38 px entre les colonnes,
+   48 px entre les lignes, grille de 914 px de large.
+   ========================================================================== */
+
+/* ---- Page --------------------------------------------------------------- */
+
+/* Bloc centré de 914 px (4 cartes de 200 px + 3 écarts de 38 px) */
+.page-books {
+    width: min(100% - 48px, 914px);
+    margin-right: auto;
+    margin-left: auto;
+    /* 133 px entre le header et le titre, 77 px entre la dernière ligne et le footer */
+    padding: 133px 0 77px;
+}
+
+/* Titre à gauche, champ de recherche à droite */
+.page-books__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    /* 72 px entre le titre et la première ligne de cartes */
+    margin-bottom: 70px;
+}
+
+.page-books__empty {
+    padding: 40px 0;
+    text-align: center;
+}
+
+/* ---- Recherche ---------------------------------------------------------- */
+
+.search {
+    position: relative;
+    flex-shrink: 0;
+    width: 321px;
+}
+
+.search__input {
+    width: 100%;
+    height: 50px;
+    padding: 0 16px 0 52px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    font-family: var(--font-text);
+    font-size: 0.875rem;
+}
+
+.search__input::placeholder {
+    color: var(--color-muted);
+    opacity: 1;
+}
+
+/* Loupe placée à gauche, à l'intérieur du champ */
+.search__button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+/* ---- Grille de livres --------------------------------------------------- */
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    justify-content: center;
+    /* 48 px entre les lignes, 38 px entre les colonnes */
+    gap: 48px 38px;
+}
+
+/* ---- Carte d'un livre --------------------------------------------------- */
+
+/* Carte blanche : image carrée en haut, coins arrondis seulement en bas */
+.book-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 10px 10px;
+    background-color: var(--color-white);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
+}
+
+/* Image carrée de 200 px : "height: auto" annule la hauteur de 400 px écrite dans le HTML */
+.book-card__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+/* 20 px entre l'image et le titre, 14 px de marge à gauche */
+.book-card__body {
+    padding: 20px 14px;
+}
+
+/* Titre : Inter Regular 16 px, noir, sur une seule ligne ("Titre long..." si trop long) */
+.book-card__title {
+    overflow: hidden;
+    color: var(--color-black);
+    font-family: var(--font-text);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 19px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Auteur : Inter Regular 14 px, gris, à 8 px sous le titre */
+.book-card__author {
+    margin-top: 8px;
+    overflow: hidden;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 17px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---- Étiquette de disponibilité ----------------------------------------- */
+
+/* Posée sur l'image, à 16 px du haut et 12 px de la droite */
+.book-card__tag {
+    position: absolute;
+    top: 16px;
+    right: 12px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 999px;
+    color: var(--color-white);
+    font-size: 0.75rem;
+    line-height: 18px;
+    white-space: nowrap;
+}
+
+.tag--available {
+    background-color: var(--color-green-light);
+}
+
+.tag--unavailable {
+    background-color: var(--color-red);
+}
+
+
