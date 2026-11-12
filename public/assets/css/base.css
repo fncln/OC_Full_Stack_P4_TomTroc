@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Tom Troc - styles de base
+   Variables (couleurs, polices, dimensions), remise à zéro et typographie.
+   Pour changer une couleur du site, il suffit de modifier sa variable ci-dessous.
+   ========================================================================== */
+
+:root {
+    /* Couleurs de la maquette */
+    --color-green: #00ac66;
+    --color-green-light: #6dc5a1;   /* étiquette "disponible" */
+    --color-red: #c56d6d;           /* étiquette "non dispo." */
+    --color-black: #000000;         /* titres */
+    --color-text: #292929;          /* texte du menu et du footer */
+    --color-muted: #a6a6a6;         /* "Gris texte" : auteur, texte secondaire (contraste à valider avec le test WCAG) */
+    --color-white: #ffffff;
+    --color-page: #faf9f7;          /* fond de la page */
+    --color-header: #f5f3ef;        /* fond du header */
+
+    /* Polices : Inter pour les textes, Playfair Display pour les titres */
+    --font-text: "Inter", Arial, Helvetica, sans-serif;
+    --font-title: "Playfair Display", Georgia, "Times New Roman", serif;
+
+    /* Dimensions du site */
+    --container-width: 1140px;
+    --header-height: 80px;
+    --footer-height: 61px;
+}
+
+/* ---- Remise à zéro ------------------------------------------------------ */
+
+/* Les largeurs et hauteurs incluent les marges intérieures et les bordures */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    /* Le footer reste en bas de la fenêtre même sur une page courte */
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--color-page);
+    color: var(--color-text);
+    font-family: var(--font-text);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.21;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+/* ---- Typographie -------------------------------------------------------- */
+
+/* Titre principal d'une page : Playfair Display Regular 36 px, noir */
+.page-title {
+    color: var(--color-black);
+    font-family: var(--font-title);
+    font-size: 2.25rem;
+    font-weight: 400;
+    line-height: 48px;
+}
+
+/* ---- Mise en page ------------------------------------------------------- */
+
+/* Contenu centré, 1140 px au maximum, avec une marge de 24 px sur les petits écrans */
+.container {
+    width: min(100% - 48px, var(--container-width));
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Le contenu de la page prend toute la place disponible entre le header et le footer */
+.main {
+    flex: 1 0 auto;
+}
+
+/* ---- Accessibilité ------------------------------------------------------ */
+
+/* Contour visible quand on navigue au clavier */
+:focus-visible {
+    outline: 3px solid var(--color-text);
+    outline-offset: 2px;
+}
+
+/* Texte invisible à l'écran mais lu par les lecteurs d'écran */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+/* Lien "Aller au contenu" : visible seulement quand il reçoit le focus au clavier */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 100;
+    padding: 12px 16px;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.skip-link:focus {
+    top: 16px;
+}
+
+/* ---- Pages d'erreur ----------------------------------------------------- */
+
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.error-page h1 {
+    color: var(--color-black);
+    font-family: var(--font-title);
+    font-size: 2.25rem;
+    font-weight: 400;
+    line-height: 48px;
+}
+
+.error-page pre {
+    max-width: 100%;
+    overflow-x: auto;
+    text-align: left;
+}
