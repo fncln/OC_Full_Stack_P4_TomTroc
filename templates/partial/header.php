@@ -15,6 +15,11 @@
         <nav class="site-nav" aria-label="Navigation principale">
             <ul class="site-nav__list">
                 <li>
+                    <a class="site-nav__link<?= $activePage === 'home' ? ' is-active' : '' ?>"
+                       href="<?= $this->escape($this->url('/')) ?>"
+                       <?= $activePage === 'home' ? 'aria-current="page"' : '' ?>>Accueil</a>
+                </li>
+                <li>
                     <a class="site-nav__link<?= $activePage === 'books' ? ' is-active' : '' ?>"
                        href="<?= $this->escape($this->url('/books')) ?>"
                        <?= $activePage === 'books' ? 'aria-current="page"' : '' ?>>Nos livres à l'échange</a>
