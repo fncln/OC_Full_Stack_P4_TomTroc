@@ -32,20 +32,7 @@
     <ul class="book-grid">
 <?php foreach ($books as $book) : ?>
         <li class="book-grid__item">
-            <article class="book-card">
-<?php if ($book->hasImage()) : ?>
-                <img class="book-card__image"
-                     src="<?= $this->escape($this->url('/uploads/books/' . $book->getImage())) ?>"
-                     width="400" height="400" alt="">
-<?php endif; ?>
-<?php if ($book->isUnavailable()) : ?>
-                <span class="tag tag--unavailable book-card__tag">non dispo.</span>
-<?php endif; ?>
-                <div class="book-card__body">
-                    <h2 class="book-card__title"><?= $this->escape($book->getTitle()) ?></h2>
-                    <p class="book-card__author"><?= $this->escape($book->getAuthor()) ?></p>
-                </div>
-            </article>
+            <?php $this->partial('book-card', ['book' => $book, 'headingLevel' => 2]) ?>
         </li>
 <?php endforeach; ?>
     </ul>
