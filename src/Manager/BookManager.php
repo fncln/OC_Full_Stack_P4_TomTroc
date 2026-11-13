@@ -40,6 +40,28 @@ final class BookManager
     }
 
     /**
+     * Retourne les derniers livres ajoutés, du plus récent au plus ancien.
+     *
+     * @param int $limit Nombre de livres à retourner
+     *
+     * @return Book[]
+     */
+    public function findLatest(int $limit): array
+    {
+        $statement = $this->pdo->prepare(
+            'SELECT id, title, author, description, image, status, created_at
+             FROM books
+             ORDER BY id DESC
+             LIMIT :limit'
+        );
+        // LIMIT attend un nombre entier : on l'indique explicitement à PDO
+        $statement->bindValue('limit', $limit, PDO::PARAM_INT);
+        $statement->execute();
+
+        return $this->createBooksFromRows($statement->fetchAll());
+    }
+
+    /**
      * Retourne les livres dont le titre contient le texte cherché, du plus récent au plus ancien.
      *
      * @return Book[]
