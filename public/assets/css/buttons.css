@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Tom Troc - boutons
+   Deux variantes : "primary" (fond vert) et "outline" (contour vert).
+   ========================================================================== */
+
+/* Forme commune : 63 px de haut, coins arrondis de 10 px, texte Inter SemiBold 16 px */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 63px;
+    /* 39 px + 1 px de bordure = 40 px de chaque côté du texte */
+    padding: 0 39px;
+    border: 1px solid var(--color-green);
+    border-radius: 10px;
+    font-family: var(--font-text);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.21;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Bouton plein : fond vert, texte blanc, vert foncé au survol */
+.btn--primary {
+    background-color: var(--color-green);
+    color: var(--color-white);
+}
+
+.btn--primary:hover {
+    border-color: var(--color-green-dark);
+    background-color: var(--color-green-dark);
+}
+
+/* Bouton contour : fond de la page, bordure et texte verts */
+.btn--outline {
+    background-color: var(--color-header);
+    color: var(--color-green);
+}
+
+.btn--outline:hover {
+    border-color: var(--color-green-dark);
+    color: var(--color-green-dark);
+}

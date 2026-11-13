@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/base.css')) ?>">
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/layout.css')) ?>">
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/books.css')) ?>">
+    <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/buttons.css')) ?>">
+    <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/home.css')) ?>">
 </head>
 <body>
 <a class="skip-link" href="#content">Aller au contenu</a>

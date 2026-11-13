@@ -7,6 +7,7 @@
 :root {
     /* Couleurs de la maquette */
     --color-green: #00ac66;
+    --color-green-dark: #006d41;    /* bouton au survol */
     --color-green-light: #6dc5a1;   /* étiquette "disponible" */
     --color-red: #c56d6d;           /* étiquette "non dispo." */
     --color-black: #000000;         /* titres */

@@ -1,0 +1,199 @@
+/* ==========================================================================
+   Tom Troc - page d'accueil (version desktop)
+   Mesures issues de la maquette, pour un écran de 1440 px de large.
+   ========================================================================== */
+
+/* ---- Hero : présentation et photo ---------------------------------------- */
+
+/* Le fond du hero est celui du header : les deux forment un seul bloc de 827 px de haut */
+.hero {
+    background-color: var(--color-header);
+}
+
+/* Deux colonnes : le texte à gauche, la photo à droite (747 px de haut sous le header) */
+.hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    min-height: 747px;
+    /* 80 px entre le header et la photo */
+    padding-top: 80px;
+}
+
+.hero__text {
+    padding: 156px 0 0 140px;
+}
+
+/* Playfair Display Regular 36 px sur deux lignes : "Rejoignez nos" puis "lecteurs passionnés" (315 px) */
+.hero__title {
+    max-width: 320px;
+    color: var(--color-black);
+    font-family: var(--font-title);
+    font-size: 2.25rem;
+    font-weight: 400;
+    line-height: 48px;
+}
+
+.hero__lead {
+    max-width: 330px;
+    margin: 16px 0 40px;
+}
+
+/* Photo de 404 x 539 px, légèrement décalée vers la droite par rapport au centre */
+.hero__figure {
+    justify-self: start;
+    margin: 0 0 0 6px;
+}
+
+.hero__image {
+    width: 404px;
+    max-width: none;
+    height: 539px;
+    object-fit: cover;
+}
+
+/* Légende "Hamza" : Inter Italic 11 px, grise, alignée à droite sous la photo */
+.hero__credit {
+    margin-top: 12px;
+    padding-right: 5px;
+    color: var(--color-muted);
+    font-size: 0.6875rem;
+    font-style: italic;
+    line-height: 13px;
+    text-align: right;
+}
+
+/* ---- Sections (derniers livres, fonctionnement) --------------------------- */
+
+.section {
+    padding: 80px 0;
+}
+
+.section--light {
+    padding-bottom: 64px;
+    background-color: var(--color-page);
+}
+
+.section--alt {
+    background-color: var(--color-header);
+}
+
+/* Titre de section : Playfair Display Regular 32 px, centré */
+.section__title {
+    color: var(--color-black);
+    font-family: var(--font-title);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 43px;
+    text-align: center;
+}
+
+.section__lead {
+    max-width: 380px;
+    margin: 16px auto 0;
+    text-align: center;
+}
+
+.section__empty {
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* Bouton centré sous le contenu de la section */
+.section__action {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+}
+
+/* 80 px entre le titre "Les derniers livres ajoutés" et les cartes */
+.book-grid--home {
+    margin-top: 80px;
+}
+
+/* ---- Comment ça marche ? : les 4 étapes ----------------------------------- */
+
+/* 4 cartes de 215 x 139 px, 36 px entre elles */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 215px);
+    justify-content: center;
+    gap: 36px;
+    margin: 46px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.steps__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 139px;
+    padding: 0 20px;
+    border-radius: 10px;
+    background-color: var(--color-white);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* ---- Bandeau photo --------------------------------------------------------- */
+
+/* Photo pleine largeur de 230 px de haut */
+.band {
+    display: block;
+}
+
+.band__image {
+    width: 100%;
+    max-width: none;
+    height: 230px;
+    object-fit: cover;
+}
+
+/* ---- Nos valeurs ----------------------------------------------------------- */
+
+.values {
+    padding: 80px 0 90px;
+}
+
+/* Bloc de 462 px qui commence à 542 px du bord gauche (sur un écran de 1440 px) */
+.values__inner {
+    width: 462px;
+    margin-left: calc(50% - 178px);
+}
+
+.values__title {
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+/* Textes de 392 px de large au maximum, 17 px entre deux paragraphes */
+.values__inner p {
+    max-width: 392px;
+}
+
+.values__inner p + p {
+    margin-top: 17px;
+}
+
+/* Signature à gauche, cœur (120 x 102 px) à droite */
+.values__footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 102px;
+    margin-top: 21px;
+}
+
+.values .values__signature {
+    margin-top: 30px;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    font-style: italic;
+    line-height: 15px;
+}
+
+.values__heart {
+    width: 120px;
+    height: 102px;
+}
