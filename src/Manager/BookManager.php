@@ -40,6 +40,27 @@ final class BookManager
     }
 
     /**
+     * Retourne le livre qui a cet identifiant, ou null s'il n'existe pas.
+     */
+    public function findById(int $id): ?Book
+    {
+        $statement = $this->pdo->prepare(
+            'SELECT id, title, author, description, image, status, created_at
+            FROM books
+            WHERE id = :id'
+        );
+        $statement->execute(['id' => $id]);
+        $row = $statement->fetch();
+
+        // fetch() retourne false quand aucune ligne ne correspond
+        if ($row === false) {
+            return null;
+        }
+
+        return $this->createBookFromRow($row);
+    }
+
+    /**
      * Retourne les derniers livres ajoutés, du plus récent au plus ancien.
      *
      * @param int $limit Nombre de livres à retourner
