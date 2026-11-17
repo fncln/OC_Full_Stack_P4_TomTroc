@@ -13,7 +13,7 @@ use App\Controller\ErrorController;
  */
 final class Router
 {
-    /** @var array<int, array{method: string, path: string, controller: string, action: string}> */
+    /** @var array<int, array{method: string, pattern: string, controller: string, action: string}> */
     private array $routes = [];
 
     /**
@@ -27,7 +27,8 @@ final class Router
      * Déclare une route.
      *
      * @param string $httpMethod      Méthode HTTP : "GET" pour afficher une page, "POST" pour envoyer un formulaire
-     * @param string $path            Adresse de la page (ex. "/books")
+     * @param string $path            Adresse de la page (ex. "/books"). "{id}" représente un nombre :
+     *                                "/books/{id}" accepte "/books/12" mais pas "/books/abc"
      * @param string $controllerClass Nom complet de la classe du contrôleur
      * @param string $action          Nom de la méthode du contrôleur à appeler
      */
@@ -35,7 +36,7 @@ final class Router
     {
         $this->routes[] = [
             'method' => $httpMethod,
-            'path' => $path,
+            'pattern' => $this->createPattern($path),
             'controller' => $controllerClass,
             'action' => $action,
         ];
@@ -50,13 +51,19 @@ final class Router
         $requestedPath = $this->extractPath($requestUri);
 
         foreach ($this->routes as $route) {
-            if ($route['method'] === $httpMethod && $route['path'] === $requestedPath) {
+            $isSameMethod = $route['method'] === $httpMethod;
+
+            if ($isSameMethod && preg_match($route['pattern'], $requestedPath, $matches) === 1) {
                 $controllerClass = $route['controller'];
                 $action = $route['action'];
 
-                // Crée le contrôleur puis appelle sa méthode, dont le nom est stocké dans $action
+                // $matches[0] est l'adresse entière : seuls les nombres trouvés dans l'adresse nous intéressent
+                array_shift($matches);
+
+                // Crée le contrôleur puis appelle sa méthode, dont le nom est stocké dans $action.
+                // Les nombres de l'adresse lui sont transmis (ex. "/books/12" appelle show(12)).
                 $controller = new $controllerClass();
-                $controller->$action();
+                $controller->$action(...array_map('intval', $matches));
 
                 return;
             }
@@ -88,6 +95,17 @@ final class Router
         }
 
         return $scriptDirectory;
+    }
+
+    /**
+     * Transforme l'adresse d'une route en expression régulière.
+     * Exemple : "/books/{id}" devient "#^/books/(\d+)$#" ("\d+" = un ou plusieurs chiffres).
+     */
+    private function createPattern(string $path): string
+    {
+        $pathWithNumbers = (string) preg_replace('/\{[a-z]+\}/', '(\d+)', $path);
+
+        return '#^' . $pathWithNumbers . '$#';
     }
 
     /**
