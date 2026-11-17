@@ -36,6 +36,29 @@ final class BookController extends AbstractController
     }
 
     /**
+     * Affiche la page d'un livre : image, titre, auteur et description.
+     * Si aucun livre n'a cet identifiant, la page 404 est affichée.
+     *
+     * @param int $id Identifiant du livre, lu dans l'adresse ("/books/12")
+     */
+    public function show(int $id): void
+    {
+        $book = (new BookManager())->findById($id);
+
+        if ($book === null) {
+            (new ErrorController())->notFound();
+
+            return;
+        }
+
+        $this->render('book/show', [
+            'title' => $book->getTitle(),
+            'activePage' => 'books',
+            'book' => $book,
+        ]);
+    }
+
+    /**
      * Lit le texte saisi dans le champ de recherche (adresse "/books?q=hygge").
      * Retourne une chaîne vide si aucune recherche n'a été faite.
      */

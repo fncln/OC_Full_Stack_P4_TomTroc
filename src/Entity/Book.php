@@ -100,6 +100,23 @@ final class Book
     }
 
     /**
+     * Découpe la description en paragraphes : une ligne vide sépare deux paragraphes.
+     *
+     * @return string[]
+     */
+    public function getDescriptionParagraphs(): array
+    {
+        // \R = un retour à la ligne (Windows ou autre), "{2,}" = au moins deux de suite
+        $paragraphs = preg_split('/\R{2,}/', trim($this->description));
+
+        if ($paragraphs === false) {
+            return [$this->description];
+        }
+
+        return $paragraphs;
+    }
+
+    /**
      * Indique si le livre a une photo.
      */
     public function hasImage(): bool
