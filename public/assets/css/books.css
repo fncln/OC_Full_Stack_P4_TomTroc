@@ -154,3 +154,27 @@
 }
 
 
+/* ---- Carte cliquable ----------------------------------------------------- */
+
+/* Le lien du titre s'étend sur toute la carte : un clic n'importe où ouvre la page du livre */
+.book-card__link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.book-card__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+/* Au clavier, le contour entoure toute la carte */
+.book-card__link:focus-visible {
+    outline: none;
+}
+
+.book-card__link:focus-visible::after {
+    outline: 3px solid var(--color-text);
+    outline-offset: -3px;
+}
+
