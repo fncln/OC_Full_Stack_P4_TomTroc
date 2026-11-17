@@ -18,7 +18,9 @@
     <span class="tag tag--unavailable book-card__tag">non dispo.</span>
 <?php endif; ?>
     <div class="book-card__body">
-        <h<?= $headingLevel ?> class="book-card__title"><?= $this->escape($book->getTitle()) ?></h<?= $headingLevel ?>>
+        <h<?= $headingLevel ?> class="book-card__title">
+            <a class="book-card__link" href="<?= $this->escape($this->url('/books/' . $book->getId())) ?>"><?= $this->escape($book->getTitle()) ?></a>
+        </h<?= $headingLevel ?>>
         <p class="book-card__author"><?= $this->escape($book->getAuthor()) ?></p>
     </div>
 </article>
