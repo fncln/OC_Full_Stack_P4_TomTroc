@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Tom Troc - page d'un livre (version desktop)
+   Mesures issues de la maquette, pour un écran de 1440 px de large :
+   photo de 720 x 863 px à gauche, texte à droite (85 px de marge à gauche, 150 px à droite).
+   ========================================================================== */
+
+/* ---- Fil d'Ariane --------------------------------------------------------- */
+
+/* Bande de 44 px sous le header, de la même couleur que lui */
+.breadcrumb-bar {
+    background-color: var(--color-header);
+}
+
+/* "Nos livres > Titre du livre" : Inter 9 px, gris */
+.breadcrumb {
+    height: 44px;
+    padding-top: 16px;
+    color: var(--color-muted);
+    font-size: 0.5625rem;
+    line-height: 11px;
+}
+
+/* Liste sans numéro, sans retrait ni marge (valeurs par défaut des listes numérotées) */
+.breadcrumb__list {
+    display: flex;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Le signe ">" est ajouté devant le titre du livre */
+.breadcrumb__list li + li::before {
+    content: ">";
+    margin-right: 4px;
+}
+
+.breadcrumb__link {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ---- Livre : photo à gauche, texte à droite -------------------------------- */
+
+/* Deux colonnes égales, 863 px de haut au minimum (le footer commence à 987 px) */
+.book-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 863px;
+}
+
+/* La photo remplit sa colonne, rognée si besoin : elle ne change jamais la hauteur de la page */
+.book-detail__media {
+    position: relative;
+}
+
+.book-detail__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Le texte reste dans la colonne de droite, même si le livre n'a pas de photo */
+.book-detail__content {
+    grid-column: 2;
+    /* 59 px sous le fil d'Ariane, 85 px à gauche, 150 px à droite, 80 px en bas */
+    padding: 59px 150px 80px 85px;
+}
+
+/* Titre : Playfair Display Regular 36 px, noir */
+.book-detail__title {
+    color: var(--color-black);
+    font-family: var(--font-title);
+    font-size: 2.25rem;
+    font-weight: 400;
+    line-height: 48px;
+}
+
+/* Auteur : Inter Regular 16 px, gris, à 16 px sous le titre */
+.book-detail__author {
+    margin-top: 16px;
+    color: var(--color-muted);
+}
+
+/* Petit trait de 28 px sous l'auteur, à 32 px au-dessus et au-dessous */
+.book-detail__rule {
+    width: 28px;
+    height: 0;
+    margin: 32px 0;
+    border: 0;
+    border-top: 1px solid var(--color-muted);
+}
+
+/* Petit titre en majuscules ("DESCRIPTION", puis "PROPRIÉTAIRE") : Inter Bold 9 px */
+.label-title {
+    color: var(--color-text);
+    font-family: var(--font-text);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    line-height: 10px;
+    text-transform: uppercase;
+}
+
+/* Description : Inter Regular 14 px, une ligne vide (17 px) entre deux paragraphes */
+.book-detail__description {
+    margin-top: 16px;
+    font-size: 0.875rem;
+}
+
+.book-detail__description p + p {
+    margin-top: 17px;
+}
