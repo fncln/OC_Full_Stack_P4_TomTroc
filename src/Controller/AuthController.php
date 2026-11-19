@@ -81,6 +81,55 @@ final class AuthController extends AbstractController
     }
 
     /**
+     * Affiche le formulaire de connexion.
+     */
+    public function showLogin(): void
+    {
+        $this->redirectIfLoggedIn();
+        $this->renderLoginPage('', '');
+    }
+
+    /**
+     * Traite le formulaire de connexion : vérifie l'email et le mot de passe.
+     */
+    public function login(): void
+    {
+        $this->redirectIfLoggedIn();
+
+        $email = strtolower($this->readText('email'));
+        $password = $this->readPassword();
+        $user = (new UserManager())->findByEmail($email);
+
+        $isPasswordCorrect = false;
+
+        if ($user instanceof User) {
+            // Compare le mot de passe saisi avec le hash enregistré
+            $isPasswordCorrect = password_verify($password, $user->getPassword());
+        }
+
+        if ($isPasswordCorrect === false) {
+            // Même message que l'email soit inconnu ou le mot de passe faux : on ne révèle pas quel compte existe
+            $this->renderLoginPage('Adresse email ou mot de passe incorrect.', $email);
+
+            return;
+        }
+
+        Session::login($user->getId());
+        Session::addFlash('success', 'Vous êtes bien connecté.');
+        $this->redirect('/');
+    }
+
+    /**
+     * Déconnecte le membre puis retourne à l'accueil.
+     */
+    public function logout(): void
+    {
+        Session::logout();
+        Session::addFlash('success', 'Vous avez bien été déconnecté.');
+        $this->redirect('/');
+    }
+
+    /**
      * Vérifie les champs du formulaire d'inscription.
      *
      * @return array<string, string> Les messages d'erreur, indexés par nom de champ (vide si tout est valide)
@@ -142,6 +191,21 @@ final class AuthController extends AbstractController
             'activePage' => 'login',
             'errors' => $errors,
             'username' => $username,
+            'email' => $email,
+        ], $statusCode);
+    }
+
+    /**
+     * Affiche la page de connexion (code 422 quand l'email ou le mot de passe est faux).
+     */
+    private function renderLoginPage(string $error, string $email): void
+    {
+        $statusCode = strlen($error) > 0 ? 422 : 200;
+
+        $this->render('auth/login', [
+            'title' => 'Connexion',
+            'activePage' => 'login',
+            'error' => $error,
             'email' => $email,
         ], $statusCode);
     }
