@@ -6,6 +6,7 @@ use App\Controller\ErrorController;
 use App\Core\Autoloader;
 use App\Core\Config;
 use App\Core\Router;
+use App\Core\Session;
 
 /*
  * Point d'entrée unique du site : toutes les pages passent par ce fichier.
@@ -29,6 +30,9 @@ try {
     } else {
         ini_set('display_errors', '0');
     }
+
+    // La session permet de garder le membre connecté d'une page à l'autre
+    Session::start();
 
     // 3. Déclaration des routes, puis exécution de celle qui correspond à l'adresse demandée
     $router = new Router($basePath);
