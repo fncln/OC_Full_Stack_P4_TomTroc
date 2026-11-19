@@ -32,7 +32,9 @@ final class View
     public function render(string $template, array $data = []): string
     {
         // Valeurs par défaut, remplacées par celles données par le contrôleur
-        $data = array_merge(['title' => 'Tom Troc', 'activePage' => ''], $data);
+        $data = array_merge(['title' => 'Tom Troc', 'activePage' => '', 'currentUser' => null, 'flashes' => []], 
+        $data
+        );
 
         // 1. On génère d'abord le contenu propre à la page...
         $content = $this->renderFile($template, $data);
