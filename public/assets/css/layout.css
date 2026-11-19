@@ -79,3 +79,35 @@
 }
 
 
+/* ---- Liens du membre (Connexion ou Déconnexion) ---------------------------- */
+
+/* Le menu occupe la place restante : le groupe du membre est poussé à droite */
+.site-nav {
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+/* Trait vertical gris clair (19 px de haut), puis 58 px avant le lien */
+.site-nav__list--member {
+    margin-left: auto;
+    padding: 1px 0 1px 58px;
+    border-left: 1px solid #e5e3e0;
+}
+
+/* "Déconnexion" est un bouton (formulaire POST) qui doit ressembler aux autres liens */
+.site-nav__button {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    line-height: inherit;
+    cursor: pointer;
+}
+
+/* Le formulaire ne doit pas ajouter de marge autour du bouton */
+.site-nav__list--member form {
+    margin: 0;
+}
+
