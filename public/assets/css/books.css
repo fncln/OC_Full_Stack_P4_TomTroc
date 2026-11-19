@@ -178,3 +178,21 @@
     outline-offset: -3px;
 }
 
+/* ---- Vendeur du livre ---------------------------------------------------- */
+
+/* "Vendu par : pseudo" : Inter Italic 11 px, gris, à 23 px sous l'auteur */
+.book-card__seller {
+    margin-top: 23px;
+    overflow: hidden;
+    color: var(--color-muted);
+    font-size: 0.6875rem;
+    font-style: italic;
+    line-height: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Avec la ligne du vendeur, la carte mesure 324 px de haut (24 px sous le vendeur) */
+.book-card__body {
+    padding-bottom: 24px;
+}
