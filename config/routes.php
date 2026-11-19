@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Controller\AuthController;
 use App\Controller\BookController;
 use App\Controller\HomeController;
 
@@ -13,4 +14,6 @@ return [
     ['GET', '/', HomeController::class, 'index'],
     ['GET', '/books', BookController::class, 'index'],
     ['GET', '/books/{id}', BookController::class, 'show'],
+    ['GET', '/register', AuthController::class, 'showRegister'],
+    ['POST', '/register', AuthController::class, 'register'],
 ];
