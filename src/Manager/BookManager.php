@@ -15,6 +15,16 @@ use PDO;
  */
 final class BookManager
 {
+
+    /**
+     * Début de chaque requête sur les livres : les colonnes du livre et le pseudo de son propriétaire.
+     * Un livre est relié à son propriétaire par la clé étrangère books.user_id (jointure avec la table "users").
+     */
+    private const SELECT_BOOKS = 'SELECT b.id, b.user_id, b.title, b.author, b.description, b.image, b.status,
+            b.created_at, u.username AS owner_username
+        FROM books b
+        INNER JOIN users u ON u.id = b.user_id';
+
     private PDO $pdo;
 
     public function __construct()
@@ -29,11 +39,7 @@ final class BookManager
      */
     public function findAll(): array
     {
-        $statement = $this->pdo->prepare(
-            'SELECT id, title, author, description, image, status, created_at
-             FROM books
-             ORDER BY id DESC'
-        );
+        $statement = $this->pdo->prepare(self::SELECT_BOOKS . ' ORDER BY b.id DESC');
         $statement->execute();
 
         return $this->createBooksFromRows($statement->fetchAll());
@@ -44,11 +50,7 @@ final class BookManager
      */
     public function findById(int $id): ?Book
     {
-        $statement = $this->pdo->prepare(
-            'SELECT id, title, author, description, image, status, created_at
-            FROM books
-            WHERE id = :id'
-        );
+        $statement = $this->pdo->prepare(self::SELECT_BOOKS . ' WHERE b.id = :id');
         $statement->execute(['id' => $id]);
         $row = $statement->fetch();
 
@@ -69,12 +71,7 @@ final class BookManager
      */
     public function findLatest(int $limit): array
     {
-        $statement = $this->pdo->prepare(
-            'SELECT id, title, author, description, image, status, created_at
-             FROM books
-             ORDER BY id DESC
-             LIMIT :limit'
-        );
+        $statement = $this->pdo->prepare(self::SELECT_BOOKS . ' ORDER BY b.id DESC LIMIT :limit');
         // LIMIT attend un nombre entier : on l'indique explicitement à PDO
         $statement->bindValue('limit', $limit, PDO::PARAM_INT);
         $statement->execute();
@@ -92,12 +89,7 @@ final class BookManager
         // Dans un LIKE, les caractères % et _ ont un sens spécial : on les neutralise
         $escapedTerm = addcslashes($searchTerm, '%_\\');
 
-        $statement = $this->pdo->prepare(
-            'SELECT id, title, author, description, image, status, created_at
-             FROM books
-             WHERE title LIKE :search
-             ORDER BY id DESC'
-        );
+        $statement = $this->pdo->prepare(self::SELECT_BOOKS . ' WHERE b.title LIKE :search ORDER BY b.id DESC');
         // La valeur est envoyée séparément de la requête : aucune injection SQL possible
         $statement->execute(['search' => '%' . $escapedTerm . '%']);
 
@@ -131,12 +123,14 @@ final class BookManager
     {
         $book = new Book();
         $book->setId((int) $row['id']);
+        $book->setUserId((int) $row['user_id']);
         $book->setTitle((string) $row['title']);
         $book->setAuthor((string) $row['author']);
         $book->setDescription((string) $row['description']);
         $book->setImage($row['image']);
         $book->setStatus((string) $row['status']);
         $book->setCreatedAt(new DateTimeImmutable((string) $row['created_at']));
+        $book->setOwnerUsername((string) $row['owner_username']);
 
         return $book;
     }

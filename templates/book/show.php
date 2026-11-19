@@ -32,5 +32,11 @@
             <p><?= nl2br($this->escape($paragraph)) ?></p>
 <?php endforeach; ?>
         </div>
+        <h2 class="label-title book-detail__owner-label">Propriétaire</h2>
+        <p class="owner-chip">
+            <img class="owner-chip__avatar" src="<?= $this->escape($this->url('/assets/img/avatar-default.svg')) ?>"
+                 width="48" height="48" alt="">
+            <span class="owner-chip__name"><?= $this->escape($book->getOwnerUsername()) ?></span>
+        </p>
     </div>
 </article>

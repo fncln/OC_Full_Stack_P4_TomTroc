@@ -19,12 +19,16 @@ final class Book
     public const STATUS_UNAVAILABLE = 'unavailable';
 
     private int $id = 0;
+    private int $userId = 0;
     private string $title = '';
     private string $author = '';
     private string $description = '';
     private ?string $image = null;
     private string $status = self::STATUS_AVAILABLE;
     private ?DateTimeImmutable $createdAt = null;
+
+    /** Pseudo du propriétaire, lu dans la table "users" avec le livre */
+    private string $ownerUsername = '';
 
     public function getId(): int
     {
@@ -34,6 +38,19 @@ final class Book
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * Identifiant du membre propriétaire du livre.
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
     }
 
     public function getTitle(): string
@@ -97,6 +114,19 @@ final class Book
     public function setCreatedAt(DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * Pseudo du membre propriétaire du livre.
+     */
+    public function getOwnerUsername(): string
+    {
+        return $this->ownerUsername;
+    }
+
+    public function setOwnerUsername(string $ownerUsername): void
+    {
+        $this->ownerUsername = $ownerUsername;
     }
 
     /**

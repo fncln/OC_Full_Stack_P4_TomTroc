@@ -22,5 +22,6 @@
             <a class="book-card__link" href="<?= $this->escape($this->url('/books/' . $book->getId())) ?>"><?= $this->escape($book->getTitle()) ?></a>
         </h<?= $headingLevel ?>>
         <p class="book-card__author"><?= $this->escape($book->getAuthor()) ?></p>
+        <p class="book-card__seller">Vendu par : <?= $this->escape($book->getOwnerUsername()) ?></p>
     </div>
 </article>
