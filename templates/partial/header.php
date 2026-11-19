@@ -3,6 +3,7 @@
  * En-tête du site : logo et menu de navigation.
  *
  * @var App\Core\View $this
+ * @var App\Entity\User|null $currentUser Membre connecté (null pour un visiteur)
  * @var string $activePage Page courante ("books" pour "Nos livres à l'échange")
  */
 ?>
@@ -25,6 +26,22 @@
                        <?= $activePage === 'books' ? 'aria-current="page"' : '' ?>>Nos livres à l'échange</a>
                 </li>
             </ul>
+            <ul class="site-nav__list site-nav__list--member">
+<?php if ($currentUser === null) : ?>
+                <li>
+                    <a class="site-nav__link<?= $activePage === 'login' ? ' is-active' : '' ?>"
+                       href="<?= $this->escape($this->url('/login')) ?>"
+                       <?= $activePage === 'login' ? 'aria-current="page"' : '' ?>>Connexion</a>
+                </li>
+<?php else : ?>
+                <li>
+                    <form action="<?= $this->escape($this->url('/logout')) ?>" method="post">
+                        <button class="site-nav__link site-nav__button" type="submit">Déconnexion</button>
+                    </form>
+                </li>
+<?php endif; ?>
+            </ul>
+        </nav>
         </nav>
     </div>
 </header>
