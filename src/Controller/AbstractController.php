@@ -102,6 +102,14 @@ abstract class AbstractController
     }
 
     /**
+     * Crée le service qui enregistre les images envoyées par les membres (dans public/uploads).
+     */
+    protected function createImageUploader(): ImageUploader
+    {
+        return new ImageUploader(dirname(__DIR__, 2) . '/public/uploads');
+    }
+
+    /**
      * Prépare les données communes à toutes les pages.
      *
      * @return array<string, mixed>

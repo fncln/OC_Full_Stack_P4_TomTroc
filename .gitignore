@@ -1,2 +1,6 @@
 config/config.php
 config.php
+
+# Images envoyées par les membres : elles ne sont pas versionnées (les images de démonstration, elles, le sont)
+/public/uploads/books/upload-*
+/public/uploads/avatars/upload-*
