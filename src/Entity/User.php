@@ -16,6 +16,7 @@ final class User
     private string $username = '';
     private string $email = '';
     private string $password = '';
+    private ?string $avatar = null;
     private ?DateTimeImmutable $createdAt = null;
 
     public function getId(): int
@@ -62,6 +63,19 @@ final class User
     public function setPassword(string $passwordHash): void
     {
         $this->password = $passwordHash;
+    }
+
+    /**
+     * Nom du fichier de la photo de profil (dans public/uploads/avatars/), ou null si le membre n'en a pas.
+     */
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): void
+    {
+        $this->avatar = $avatar;
     }
 
     public function getCreatedAt(): ?DateTimeImmutable

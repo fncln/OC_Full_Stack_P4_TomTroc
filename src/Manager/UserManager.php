@@ -39,22 +39,26 @@ final class UserManager
 
     /**
      * Indique si ce pseudo est déjà utilisé par un membre.
+     * 
+     * @param int $exceptUserId Membre à ignorer (le membre connecté qui modifie son profil) ; 0 pour n'ignorer personne
      */
-    public function isUsernameTaken(string $username): bool
+    public function isUsernameTaken(string $username, int $exceptUserId = 0): bool
     {
-        $statement = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE username = :username');
-        $statement->execute(['username' => $username]);
+        $statement = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE username = :username AND id <> :except_id');
+        $statement->execute(['username' => $username, 'except_id' => $exceptUserId]);
 
         return (int) $statement->fetchColumn() > 0;
     }
 
     /**
      * Indique si cette adresse email est déjà utilisée par un membre.
+     * 
+     * @param int $exceptUserId Membre à ignorer (le membre connecté qui modifie son profil) ; 0 pour n'ignorer personne
      */
-    public function isEmailTaken(string $email): bool
+    public function isEmailTaken(string $email, int $exceptUserId = 0): bool
     {
-        $statement = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE email = :email');
-        $statement->execute(['email' => $email]);
+        $statement = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE email = :email AND id <> :except_id');
+        $statement->execute(['email' => $email, 'except_id' => $exceptUserId]);
 
         return (int) $statement->fetchColumn() > 0;
     }
@@ -74,6 +78,31 @@ final class UserManager
         ]);
 
         return (int) $this->pdo->lastInsertId();
+    }
+
+    /**
+     * Met à jour le pseudo, l'email et le mot de passe (hash) d'un membre.
+     */
+    public function update(User $user): void
+    {
+        $statement = $this->pdo->prepare(
+            'UPDATE users SET username = :username, email = :email, password = :password WHERE id = :id'
+        );
+        $statement->execute([
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail(),
+            'password' => $user->getPassword(),
+            'id' => $user->getId(),
+        ]);
+    }
+
+    /**
+     * Enregistre le nom du fichier de la photo de profil d'un membre.
+     */
+    public function updateAvatar(int $userId, string $avatar): void
+    {
+        $statement = $this->pdo->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
+        $statement->execute(['avatar' => $avatar, 'id' => $userId]);
     }
 
     /**
@@ -109,6 +138,7 @@ final class UserManager
         $user->setUsername((string) $row['username']);
         $user->setEmail((string) $row['email']);
         $user->setPassword((string) $row['password']);
+        $user->setAvatar($row['avatar']);
         $user->setCreatedAt(new DateTimeImmutable((string) $row['created_at']));
 
         return $user;
