@@ -15,7 +15,6 @@ use PDO;
  */
 final class BookManager
 {
-
     /**
      * Début de chaque requête sur les livres : les colonnes du livre et le pseudo de son propriétaire.
      * Un livre est relié à son propriétaire par la clé étrangère books.user_id (jointure avec la table "users").
@@ -60,6 +59,70 @@ final class BookManager
         }
 
         return $this->createBookFromRow($row);
+    }
+
+    /**
+     * Retourne les livres d'un membre, du plus récent au plus ancien.
+     *
+     * @return Book[]
+     */
+    public function findByUserId(int $userId): array
+    {
+        $statement = $this->pdo->prepare(self::SELECT_BOOKS . ' WHERE b.user_id = :user_id ORDER BY b.id DESC');
+        $statement->execute(['user_id' => $userId]);
+
+        return $this->createBooksFromRows($statement->fetchAll());
+    }
+
+    /**
+     * Enregistre un nouveau livre et retourne son identifiant.
+     */
+    public function create(Book $book): int
+    {
+        $statement = $this->pdo->prepare(
+            'INSERT INTO books (user_id, title, author, description, image, status)
+             VALUES (:user_id, :title, :author, :description, :image, :status)'
+        );
+        $statement->execute([
+            'user_id' => $book->getUserId(),
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'description' => $book->getDescription(),
+            'image' => $book->getImage(),
+            'status' => $book->getStatus(),
+        ]);
+
+        return (int) $this->pdo->lastInsertId();
+    }
+
+    /**
+     * Met à jour un livre. Le "user_id" dans la condition garantit qu'on ne modifie que le livre de son propriétaire.
+     */
+    public function update(Book $book): void
+    {
+        $statement = $this->pdo->prepare(
+            'UPDATE books
+             SET title = :title, author = :author, description = :description, image = :image, status = :status
+             WHERE id = :id AND user_id = :user_id'
+        );
+        $statement->execute([
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'description' => $book->getDescription(),
+            'image' => $book->getImage(),
+            'status' => $book->getStatus(),
+            'id' => $book->getId(),
+            'user_id' => $book->getUserId(),
+        ]);
+    }
+
+    /**
+     * Supprime un livre. Le "user_id" dans la condition garantit qu'on ne supprime que le livre de son propriétaire.
+     */
+    public function delete(int $id, int $userId): void
+    {
+        $statement = $this->pdo->prepare('DELETE FROM books WHERE id = :id AND user_id = :user_id');
+        $statement->execute(['id' => $id, 'user_id' => $userId]);
     }
 
     /**
