@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Core\Session;
 use App\Entity\User;
 use App\Manager\UserManager;
+use App\Validator\UserValidator;
 use PDOException;
 
 /**
@@ -14,17 +15,6 @@ use PDOException;
  */
 final class AuthController extends AbstractController
 {
-    private const USERNAME_MIN_LENGTH = 3;
-    private const USERNAME_MAX_LENGTH = 30;
-
-    /** Un pseudo contient des lettres, des chiffres et les signes _ . - & */
-    private const USERNAME_PATTERN = '/^[\p{L}\p{N}_.&-]+$/u';
-
-    private const PASSWORD_MIN_LENGTH = 8;
-
-    /** bcrypt ignore tout ce qui dépasse 72 octets : on refuse les mots de passe plus longs */
-    private const PASSWORD_MAX_LENGTH = 72;
-
     /**
      * Affiche le formulaire d'inscription.
      */
@@ -46,7 +36,7 @@ final class AuthController extends AbstractController
         $password = $this->readPassword();
         $userManager = new UserManager();
 
-        $errors = $this->validateRegistration($userManager, $username, $email, $password);
+        $errors = $this->validateRegistration(new UserValidator($userManager), $username, $email, $password);
 
         if (count($errors) > 0) {
             // On réaffiche le formulaire avec les erreurs, sans effacer le pseudo ni l'email saisis
@@ -135,46 +125,26 @@ final class AuthController extends AbstractController
      * @return array<string, string> Les messages d'erreur, indexés par nom de champ (vide si tout est valide)
      */
     private function validateRegistration(
-        UserManager $userManager,
+        UserValidator $validator,
         string $username,
         string $email,
         string $password
     ): array {
         $errors = [];
 
-        if ($this->isValidUsername($username) === false) {
-            $errors['username'] = 'Le pseudo doit contenir de 3 à 30 caractères : lettres, chiffres, _ . - ou &.';
-        } elseif ($userManager->isUsernameTaken($username)) {
-            $errors['username'] = 'Ce pseudo est déjà utilisé.';
-        }
+        $fieldErrors = [
+            'username' => $validator->validateUsername($username),
+            'email' => $validator->validateEmail($email),
+            'password' => $validator->validatePassword($password),
+        ];
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $errors['email'] = 'Veuillez saisir une adresse email valide.';
-        } elseif ($userManager->isEmailTaken($email)) {
-            $errors['email'] = 'Cette adresse email est déjà utilisée.';
-        }
-
-        if (strlen($password) < self::PASSWORD_MIN_LENGTH) {
-            $errors['password'] = 'Le mot de passe doit contenir au moins '
-                . self::PASSWORD_MIN_LENGTH . ' caractères.';
-        } elseif (strlen($password) > self::PASSWORD_MAX_LENGTH) {
-            $errors['password'] = 'Le mot de passe ne doit pas dépasser '
-                . self::PASSWORD_MAX_LENGTH . ' caractères.';
+        foreach ($fieldErrors as $field => $message) {
+            if (strlen($message) > 0) {
+                $errors[$field] = $message;
+            }
         }
 
         return $errors;
-    }
-
-    /**
-     * Indique si le pseudo a la bonne longueur et ne contient que des caractères autorisés.
-     */
-    private function isValidUsername(string $username): bool
-    {
-        $length = mb_strlen($username);
-
-        return $length >= self::USERNAME_MIN_LENGTH
-            && $length <= self::USERNAME_MAX_LENGTH
-            && preg_match(self::USERNAME_PATTERN, $username) === 1;
     }
 
     /**
@@ -218,29 +188,5 @@ final class AuthController extends AbstractController
         if ($this->currentUser() instanceof User) {
             $this->redirect('/');
         }
-    }
-
-    /**
-     * Lit un champ texte du formulaire, sans les espaces au début et à la fin.
-     */
-    private function readText(string $name): string
-    {
-        if (isset($_POST[$name]) && is_string($_POST[$name])) {
-            return trim($_POST[$name]);
-        }
-
-        return '';
-    }
-
-    /**
-     * Lit le mot de passe tel qu'il a été saisi : les espaces peuvent faire partie du mot de passe.
-     */
-    private function readPassword(): string
-    {
-        if (isset($_POST['password']) && is_string($_POST['password'])) {
-            return $_POST['password'];
-        }
-
-        return '';
     }
 }

@@ -78,6 +78,30 @@ abstract class AbstractController
     }
 
     /**
+     * Lit un champ texte envoyé par un formulaire (méthode POST), sans les espaces au début et à la fin.
+     */
+    protected function readPostText(string $name): string
+    {
+        if (isset($_POST[$name]) && is_string($_POST[$name])) {
+            return trim($_POST[$name]);
+        }
+
+        return '';
+    }
+
+    /**
+     * Lit le mot de passe tel qu'il a été saisi : les espaces peuvent faire partie du mot de passe.
+     */
+    protected function readPostPassword(): string
+    {
+        if (isset($_POST['password']) && is_string($_POST['password'])) {
+            return $_POST['password'];
+        }
+
+        return '';
+    }
+
+    /**
      * Prépare les données communes à toutes les pages.
      *
      * @return array<string, mixed>
