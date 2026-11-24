@@ -113,7 +113,7 @@ final class UserManager
     private function findOne(string $condition, array $parameters): ?User
     {
         $statement = $this->pdo->prepare(
-            'SELECT id, username, email, password, created_at FROM users WHERE ' . $condition
+            'SELECT id, username, email, password, avatar, created_at FROM users WHERE ' . $condition
         );
         $statement->execute($parameters);
         $row = $statement->fetch();

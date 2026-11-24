@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use DateTimeImmutable;
 use RuntimeException;
 use Throwable;
 
