@@ -102,11 +102,40 @@ abstract class AbstractController
     }
 
     /**
+     * Retourne le fichier envoyé par un formulaire (champ de type "file"), ou null s'il n'y en a pas.
+     *
+     * @return array<string, mixed>|null
+     */
+    protected function readUploadedFile(string $name): ?array
+    {
+        if (isset($_FILES[$name]) && is_array($_FILES[$name])) {
+            return $_FILES[$name];
+        }
+
+        return null;
+    }
+
+    /**
      * Crée le service qui enregistre les images envoyées par les membres (dans public/uploads).
      */
     protected function createImageUploader(): ImageUploader
     {
         return new ImageUploader(dirname(__DIR__, 2) . '/public/uploads');
+    }
+
+    /**
+     * Réserve une page aux membres connectés : un visiteur est renvoyé vers la page de connexion.
+     */
+    protected function requireLogin(): User
+    {
+        $user = $this->currentUser();
+
+        if ($user === null) {
+            Session::addFlash('error', 'Veuillez vous connecter pour accéder à cette page.');
+            $this->redirect('/login');
+        }
+
+        return $user;
     }
 
     /**

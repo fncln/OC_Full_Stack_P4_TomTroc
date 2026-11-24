@@ -63,6 +63,52 @@ final class View
     }
 
     /**
+     * Retourne l'adresse de la photo de profil, ou celle de l'avatar par défaut quand le membre n'a pas de photo.
+     */
+    public function avatarUrl(?string $avatar): string
+    {
+        if (is_string($avatar) && strlen($avatar) > 0) {
+            return $this->url('/uploads/avatars/' . $avatar);
+        }
+
+        return $this->url('/assets/img/avatar-default.svg');
+    }
+
+    /**
+     * Retourne l'adresse de la photo d'un livre, ou celle d'une image neutre quand le livre n'a pas de photo.
+     */
+    public function bookImageUrl(?string $image): string
+    {
+        if (is_string($image) && strlen($image) > 0) {
+            return $this->url('/uploads/books/' . $image);
+        }
+
+        return $this->url('/assets/img/book-placeholder.svg');
+    }
+
+    /**
+     * Retourne depuis combien de temps un membre est inscrit : "1 an", "3 mois" ou "moins d'un mois".
+     */
+    public function memberSince(?DateTimeImmutable $registeredAt): string
+    {
+        if ($registeredAt === null) {
+            return '';
+        }
+
+        $interval = $registeredAt->diff(new DateTimeImmutable());
+
+        if ($interval->y >= 1) {
+            return $interval->y . ($interval->y > 1 ? ' ans' : ' an');
+        }
+
+        if ($interval->m >= 1) {
+            return $interval->m . ' mois';
+        }
+
+        return 'moins d\'un mois';
+    }
+
+    /**
      * Construit l'adresse d'une page ou d'un fichier du site, en tenant compte du dossier
      * dans lequel le site est installé (ex. "/tomtroc").
      */

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Controller\AccountController;
 use App\Controller\AuthController;
 use App\Controller\BookController;
 use App\Controller\HomeController;
@@ -19,4 +20,7 @@ return [
     ['GET', '/login', AuthController::class, 'showLogin'],
     ['POST', '/login', AuthController::class, 'login'],
     ['POST', '/logout', AuthController::class, 'logout'],
+    ['GET', '/account', AccountController::class, 'index'],
+    ['POST', '/account/profile', AccountController::class, 'updateProfile'],
+    ['POST', '/account/avatar', AccountController::class, 'updateAvatar'],
 ];

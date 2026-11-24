@@ -9,7 +9,7 @@
 <?php if (count($flashes) > 0) : ?>
 <div class="flashes container">
 <?php foreach ($flashes as $flash) : ?>
-    <p class="alert alert--<?= $this->escape($flash['type']) ?>" role="status"><?= $this->escape($flash['message']) ?></p>
+    <p class="alert alert--<?= $this->escape($flash['type']) ?>" role="<?= $flash['type'] === 'error' ? 'alert' : 'status' ?>"><?= $this->escape($flash['message']) ?></p>
 <?php endforeach; ?>
 </div>
 <?php endif; ?>
