@@ -30,6 +30,9 @@ final class Book
     /** Pseudo du propriétaire, lu dans la table "users" avec le livre */
     private string $ownerUsername = '';
 
+    /** Nom du fichier de la photo du propriétaire, ou null s'il n'en a pas */
+    private ?string $ownerAvatar = null;
+
     public function getId(): int
     {
         return $this->id;
@@ -127,6 +130,19 @@ final class Book
     public function setOwnerUsername(string $ownerUsername): void
     {
         $this->ownerUsername = $ownerUsername;
+    }
+    
+    /**
+     * Nom du fichier de la photo de profil du propriétaire, ou null s'il n'en a pas.
+     */
+    public function getOwnerAvatar(): ?string
+    {
+        return $this->ownerAvatar;
+    }
+
+    public function setOwnerAvatar(?string $ownerAvatar): void
+    {
+        $this->ownerAvatar = $ownerAvatar;
     }
 
     /**

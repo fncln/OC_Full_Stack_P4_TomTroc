@@ -20,7 +20,7 @@ final class BookManager
      * Un livre est relié à son propriétaire par la clé étrangère books.user_id (jointure avec la table "users").
      */
     private const SELECT_BOOKS = 'SELECT b.id, b.user_id, b.title, b.author, b.description, b.image, b.status,
-            b.created_at, u.username AS owner_username
+            b.created_at, u.username AS owner_username, u.avatar AS owner_avatar
         FROM books b
         INNER JOIN users u ON u.id = b.user_id';
 
@@ -194,6 +194,7 @@ final class BookManager
         $book->setStatus((string) $row['status']);
         $book->setCreatedAt(new DateTimeImmutable((string) $row['created_at']));
         $book->setOwnerUsername((string) $row['owner_username']);
+        $book->setOwnerAvatar($row['owner_avatar']);
 
         return $book;
     }
