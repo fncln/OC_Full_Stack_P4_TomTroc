@@ -31,9 +31,9 @@ final class AuthController extends AbstractController
     {
         $this->redirectIfLoggedIn();
 
-        $username = $this->readText('username');
-        $email = strtolower($this->readText('email'));
-        $password = $this->readPassword();
+        $username = $this->readPostText('username');
+        $email = strtolower($this->readPostText('email'));
+        $password = $this->readPostPassword();
         $userManager = new UserManager();
 
         $errors = $this->validateRegistration(new UserValidator($userManager), $username, $email, $password);
@@ -86,8 +86,8 @@ final class AuthController extends AbstractController
     {
         $this->redirectIfLoggedIn();
 
-        $email = strtolower($this->readText('email'));
-        $password = $this->readPassword();
+        $email = strtolower($this->readPostText('email'));
+        $password = $this->readPostPassword();
         $user = (new UserManager())->findByEmail($email);
 
         $isPasswordCorrect = false;
