@@ -20,6 +20,14 @@ final class ErrorController extends AbstractController
         $this->render('error/404', ['title' => 'Page introuvable'], 404);
     }
 
+     /**
+     * Page affichée quand le membre n'a pas le droit d'accéder à la page (ex. le livre d'un autre membre).
+     */
+    public function forbidden(): void
+    {
+        $this->render('error/403', ['title' => 'Accès refusé'], 403);
+    }
+
     /**
      * Page affichée quand une erreur technique se produit (base de données inaccessible...).
      * Le détail de l'erreur n'est montré qu'en mode debug, jamais aux visiteurs.

@@ -14,7 +14,11 @@ use App\Controller\HomeController;
 return [
     ['GET', '/', HomeController::class, 'index'],
     ['GET', '/books', BookController::class, 'index'],
+    ['GET', '/books/new', BookController::class, 'create'],
+    ['POST', '/books/new', BookController::class, 'store'],
     ['GET', '/books/{id}', BookController::class, 'show'],
+    ['GET', '/books/{id}/edit', BookController::class, 'edit'],
+    ['POST', '/books/{id}/edit', BookController::class, 'update'],
     ['GET', '/register', AuthController::class, 'showRegister'],
     ['POST', '/register', AuthController::class, 'register'],
     ['GET', '/login', AuthController::class, 'showLogin'],
