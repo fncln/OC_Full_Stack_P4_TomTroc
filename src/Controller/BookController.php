@@ -198,6 +198,50 @@ final class BookController extends AbstractController
     }
 
     /**
+     * Affiche la page qui demande de confirmer la suppression d'un livre.
+     *
+     * @param int $id Identifiant du livre, lu dans l'adresse ("/books/12/delete")
+     */
+    public function confirmDelete(int $id): void
+    {
+        $user = $this->requireLogin();
+        $book = $this->findOwnedBook($id, $user);
+
+        if ($book === null) {
+            return;
+        }
+
+        $this->render('book/delete', [
+            'title' => 'Supprimer un livre',
+            'activePage' => 'account',
+            'book' => $book,
+        ]);
+    }
+
+    /**
+     * Supprime un livre après confirmation (réservé à son propriétaire).
+     *
+     * @param int $id Identifiant du livre, lu dans l'adresse
+     */
+    public function delete(int $id): void
+    {
+        $user = $this->requireLogin();
+        $book = $this->findOwnedBook($id, $user);
+
+        if ($book === null) {
+            return;
+        }
+
+        (new BookManager())->delete($book->getId(), $user->getId());
+
+        // La photo n'est plus utilisée : on la supprime du serveur
+        $this->createImageUploader()->delete('books', $book->getImage());
+
+        Session::addFlash('success', 'Le livre a bien été supprimé de votre bibliothèque.');
+        $this->redirect('/account');
+    }
+
+    /**
      * Retourne le livre demandé s'il appartient au membre connecté.
      * Sinon, affiche la page d'erreur (404 si le livre n'existe pas, 403 s'il appartient à un autre membre)
      * et retourne null.

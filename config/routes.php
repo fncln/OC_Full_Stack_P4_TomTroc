@@ -19,6 +19,8 @@ return [
     ['GET', '/books/{id}', BookController::class, 'show'],
     ['GET', '/books/{id}/edit', BookController::class, 'edit'],
     ['POST', '/books/{id}/edit', BookController::class, 'update'],
+    ['GET', '/books/{id}/delete', BookController::class, 'confirmDelete'],
+    ['POST', '/books/{id}/delete', BookController::class, 'delete'],
     ['GET', '/register', AuthController::class, 'showRegister'],
     ['POST', '/register', AuthController::class, 'register'],
     ['GET', '/login', AuthController::class, 'showLogin'],
