@@ -34,9 +34,12 @@
         </div>
         <h2 class="label-title book-detail__owner-label">Propriétaire</h2>
         <p class="owner-chip">
-            <img class="owner-chip__avatar" src="<?= $this->escape($this->avatarurl($book->getOwnerAvatar())) ?>"
-                 width="48" height="48" alt="">
-            <span class="owner-chip__name"><?= $this->escape($book->getOwnerUsername()) ?></span>
+            <a class="owner-chip__link" href="<?= $this->escape($this->url('/members/' . $book->getUserId())) ?>">
+                <img class="owner-chip__avatar" src="<?= $this->escape($this->avatarurl($book->getOwnerAvatar())) ?>"
+                    width="48" height="48" alt="">
+                <span class="owner-chip__name"><?= $this->escape($book->getOwnerUsername()) ?></span>
+                <span class="sr-only"> : voir son profil</span>
+            </a>
         </p>
     </div>
 </article>
