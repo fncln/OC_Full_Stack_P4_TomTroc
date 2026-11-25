@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\AbstractController;
+namespace App\Core;
 
 use finfo;
 use InvalidArgumentException;
