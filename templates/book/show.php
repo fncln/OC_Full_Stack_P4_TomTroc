@@ -1,6 +1,7 @@
 <?php
 /**
  * Page d'un livre : image, titre, auteur et description.
+ * Le nom du propriétaire est un lien vers son profil public, avec un lien pour lui envoyer un message.
  *
  * @var App\Core\View $this
  * @var App\Entity\Book $book
@@ -41,5 +42,8 @@
                 <span class="sr-only"> : voir son profil</span>
             </a>
         </p>
+<?php if ($currentUser === null || $currentUser->getId() !== $book->getUserId()) : ?>
+        <a class="btn btn--primary" href="<?= $this->escape($this->url('/messages/' . $book->getUserId())) ?>">Envoyer un message</a>
+<?php endif; ?>
     </div>
 </article>
