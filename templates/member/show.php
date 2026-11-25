@@ -24,7 +24,7 @@ $bookCount = count($books);
         </p>
         <h2 class="label-title">Bibliothèque</h2>
         <p class="profile-card__count"><?= $this->escape($bookCount) ?> livre<?= $bookCount > 1 ? 's' : '' ?></p>
-        <a class="btn btn--outline" href="<?= $this->escape($this->url('/messages/new/' . $member->getId())) ?>">Écrire un message</a>
+        <a class="btn btn--outline" href="<?= $this->escape($this->url('/messages/' . $member->getId())) ?>">Écrire un message</a>
     </section>
 
     <section class="library" aria-labelledby="library-title">
