@@ -7,7 +7,7 @@ USE `tomtroc`;
 -- 1. Table des membres
 CREATE TABLE `users` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(30) NOT NULL,
+    `username` VARCHAR(50) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
     -- Hash du mot de passe créé par password_hash() : jamais le mot de passe en clair
     `password` VARCHAR(255) NOT NULL,
