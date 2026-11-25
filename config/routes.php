@@ -6,6 +6,7 @@ use App\Controller\AccountController;
 use App\Controller\AuthController;
 use App\Controller\BookController;
 use App\Controller\HomeController;
+use App\Controller\MemberController;
 
 /*
  * Routes de l'application : [méthode HTTP, adresse, classe du contrôleur, méthode à appeler].
@@ -21,6 +22,7 @@ return [
     ['POST', '/books/{id}/edit', BookController::class, 'update'],
     ['GET', '/books/{id}/delete', BookController::class, 'confirmDelete'],
     ['POST', '/books/{id}/delete', BookController::class, 'delete'],
+    ['GET', '/members/{id}', MemberController::class, 'show'],
     ['GET', '/register', AuthController::class, 'showRegister'],
     ['POST', '/register', AuthController::class, 'register'],
     ['GET', '/login', AuthController::class, 'showLogin'],
