@@ -33,8 +33,9 @@ final class View
     public function render(string $template, array $data = []): string
     {
         // Valeurs par défaut, remplacées par celles données par le contrôleur
-        $data = array_merge(['title' => 'Tom Troc', 'activePage' => '', 'currentUser' => null, 'flashes' => []], 
-        $data
+        $data = array_merge(
+            ['title' => 'Tom Troc', 'activePage' => '', 'currentUser' => null, 'flashes' => [], 'unreadCount' => 0], 
+            $data
         );
 
         // 1. On génère d'abord le contenu propre à la page...
@@ -110,6 +111,45 @@ final class View
     }
 
     /**
+     * Date d'un message dans un fil de discussion : "21.08 15:44".
+     */
+    public function messageDate(?DateTimeImmutable $date): string
+    {
+        if ($date === null) {
+            return '';
+        }
+
+        return $date->format('d.m H:i');
+    }
+
+    /**
+     * Date du dernier message dans la liste des conversations : l'heure ("15:43") pour un message
+     * d'aujourd'hui, sinon le jour et le mois ("20.08").
+     */
+    public function conversationDate(?DateTimeImmutable $date): string
+    {
+        if ($date === null) {
+            return '';
+        }
+
+        if ($date->format('Y-m-d') === (new DateTimeImmutable())->format('Y-m-d')) {
+            return $date->format('H:i');
+        }
+
+        return $date->format('d.m');
+    }
+
+    /**
+     * Raccourcit un texte sur une seule ligne et ajoute "…" s'il dépasse la longueur demandée.
+     */
+    public function excerpt(string $text, int $length): string
+    {
+        $singleLine = (string) preg_replace('/\s+/u', ' ', $text);
+
+        return mb_strimwidth($singleLine, 0, $length, '…', 'UTF-8');
+    }
+
+    /**
      * Construit l'adresse d'une page ou d'un fichier du site, en tenant compte du dossier
      * dans lequel le site est installé (ex. "/tomtroc").
      */
@@ -131,7 +171,6 @@ final class View
         // puis on le concatène proprement après le dossier "assets/"
         return $this->url('assets/' . ltrim($path, '/'));
     }
-
 
     /**
      * Exécute un fichier template et retourne le HTML qu'il produit.

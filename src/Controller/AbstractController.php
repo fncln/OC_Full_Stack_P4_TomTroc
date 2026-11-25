@@ -8,6 +8,7 @@ use App\Core\ImageUploader;
 use App\Core\Session;
 use App\Core\View;
 use App\Entity\User;
+use App\Manager\MessageManager;
 use App\Manager\UserManager;
 use Throwable;
 
@@ -147,13 +148,33 @@ abstract class AbstractController
     private function createSharedData(): array
     {
         try {
+            $user = $this->currentUser();
+
             return [
-                'currentUser' => $this->currentUser(),
+                'currentUser' => $user,
                 'flashes' => Session::pullFlashes(),
+                'unreadCount' => $this->countUnreadMessages($user),
             ];
         } catch (Throwable $exception) {
             // Les pages d'erreur doivent rester affichables quand la base de données est inaccessible
-            return ['currentUser' => null, 'flashes' => []];
+            return ['currentUser' => null, 'flashes' => [], 'unreadCount' => 0];
+        }
+    }
+
+    /**
+     * Retourne le nombre de messages non lus du membre, affiché à côté de "Messagerie" dans le header.
+     * Un problème sur les messages ne doit pas empêcher d'afficher le reste du site : on retourne 0.
+     */
+    private function countUnreadMessages(?User $user): int
+    {
+        if ($user === null) {
+            return 0;
+        }
+
+        try {
+            return (new MessageManager())->countUnread($user->getId());
+        } catch (Throwable $exception) {
+            return 0;
         }
     }
 }
