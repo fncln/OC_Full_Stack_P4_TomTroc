@@ -35,13 +35,17 @@
                 </li>
 <?php else : ?>
                 <li>
+                    <a class="site-nav__link<?= $activePage === 'account' ? ' is-active' : '' ?>"
+                       href="<?= $this->escape($this->url('/account')) ?>"
+                       <?= $activePage === 'account' ? 'aria-current="page"' : '' ?>>Mon compte</a>
+                </li>
+                <li>
                     <form action="<?= $this->escape($this->url('/logout')) ?>" method="post">
                         <button class="site-nav__link site-nav__button" type="submit">Déconnexion</button>
                     </form>
                 </li>
 <?php endif; ?>
             </ul>
-        </nav>
         </nav>
     </div>
 </header>
