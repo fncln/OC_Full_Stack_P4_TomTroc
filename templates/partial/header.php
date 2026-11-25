@@ -5,6 +5,7 @@
  * @var App\Core\View $this
  * @var App\Entity\User|null $currentUser Membre connecté (null pour un visiteur)
  * @var string $activePage Page courante ("books" pour "Nos livres à l'échange")
+ * @var int $unreadCount Nombre de messages non lus du membre connecté
  */
 ?>
 <header class="site-header">
@@ -34,6 +35,12 @@
                        <?= $activePage === 'login' ? 'aria-current="page"' : '' ?>>Connexion</a>
                 </li>
 <?php else : ?>
+                <li>
+                    <a class="site-nav__link<?= $activePage === 'messages' ? ' is-active' : '' ?>"
+                       href="<?= $this->escape($this->url('/messages')) ?>"
+                       <?= $activePage === 'messages' ? 'aria-current="page"' : '' ?>>Messagerie<?php if ($unreadCount > 0) : ?>
+ <span class="badge"><?= $this->escape($unreadCount) ?><span class="sr-only"> message<?= $unreadCount > 1 ? 's' : '' ?> non lu<?= $unreadCount > 1 ? 's' : '' ?></span></span><?php endif; ?></a>
+                </li>
                 <li>
                     <a class="site-nav__link<?= $activePage === 'account' ? ' is-active' : '' ?>"
                        href="<?= $this->escape($this->url('/account')) ?>"

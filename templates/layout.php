@@ -7,6 +7,7 @@
  * @var string $activePage Page courante, pour repérer le lien actif du menu
  * @var string $content    HTML de la page, déjà généré par View::render()
  * @var App\Entity\User|null $currentUser Membre connecté (null pour un visiteur)
+ * @var int $unreadCount Nombre de messages non lus du membre connecté
  * @var array<int, array{type: string, message: string}> $flashes Messages à afficher une fois
  */
 ?>
@@ -28,7 +29,7 @@
 </head>
 <body>
 <a class="skip-link" href="#content">Aller au contenu</a>
-<?php $this->partial('header', ['activePage' => $activePage, 'currentUser' => $currentUser]) ?>
+<?php $this->partial('header', ['activePage' => $activePage, 'currentUser' => $currentUser, 'unreadCount' => $unreadCount]) ?>
 <main class="main" id="content">
 <?php $this->partial('flashes', ['flashes' => $flashes]) ?>
 <?= $content ?>
