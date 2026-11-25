@@ -6,14 +6,19 @@
  * @var App\Core\View $this
  * @var App\Entity\Book[] $books
  * @var bool $manage Vrai pour la page "Mon compte" du membre
+ * @var string $caption (facultatif) Légende du tableau, lue par les lecteurs d'écran
+ * @var string $emptyMessage (facultatif) Texte affiché quand il n'y a aucun livre
  */
+
+$caption = $caption ?? 'Vos livres';
+$emptyMessage = $emptyMessage ?? 'Vous n\'avez pas encore de livre dans votre bibliothèque.';
 ?>
 <?php if ($books === []) : ?>
-<p class="library__empty">Vous n'avez pas encore de livre dans votre bibliothèque.</p>
+<p class="library__empty"><?= $this->escape($emptyMessage) ?></p>
 <?php else : ?>
 <div class="table-card">
     <table class="table table--library">
-        <caption class="sr-only">Vos livres</caption>
+        <caption class="sr-only"><?= $this->escape($caption) ?></caption>
         <thead>
             <tr>
                 <th scope="col">Photo</th>
