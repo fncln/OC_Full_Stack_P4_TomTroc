@@ -11,18 +11,15 @@
     width: min(100% - 48px, 914px);
     margin-right: auto;
     margin-left: auto;
-    /* 133 px entre le header et le titre, 77 px entre la dernière ligne et le footer */
-    padding: 133px 0 77px;
+    /* 130 px entre le header et le titre, 80 px entre la dernière ligne et le footer */
+    padding: 130px 0 80px;
 }
 
 /* Titre à gauche, champ de recherche à droite */
 .page-books__header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 24px;
-    /* 72 px entre le titre et la première ligne de cartes */
-    margin-bottom: 70px;
 }
 
 .page-books__empty {
@@ -35,7 +32,7 @@
 .search {
     position: relative;
     flex-shrink: 0;
-    width: 321px;
+    width: 322px;
 }
 
 .search__input {

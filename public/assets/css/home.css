@@ -21,7 +21,7 @@
 }
 
 .hero__text {
-    padding: 156px 0 0 140px;
+    padding: 158px 0 0 140px;
 }
 
 /* Playfair Display Regular 36 px sur deux lignes : "Rejoignez nos" puis "lecteurs passionnés" (315 px) */
@@ -89,8 +89,8 @@
 }
 
 .section__lead {
-    max-width: 380px;
-    margin: 16px auto 0;
+    max-width: 397px;
+    margin: 24px auto 0;
     text-align: center;
 }
 
@@ -119,7 +119,7 @@
     grid-template-columns: repeat(4, 215px);
     justify-content: center;
     gap: 36px;
-    margin: 46px 0 0;
+    margin: 40px 0 0;
     padding: 0;
     list-style: none;
 }
@@ -163,7 +163,7 @@
 }
 
 .values__title {
-    margin-bottom: 32px;
+    margin-bottom: 29px;
     text-align: left;
 }
 
