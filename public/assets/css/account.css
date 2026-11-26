@@ -59,17 +59,8 @@
     position: absolute;
     width: 1px;
     height: 1px;
-    margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-}
-
-/* Le choix du fichier doit être validé : petit bouton sous le lien */
-.profile-card__submit {
-    min-height: 40px;
-    margin-top: 12px;
-    padding: 0 20px;
-    font-size: 0.875rem;
+    opacity: 0;
 }
 
 /* Trait de 242 px, à 70 px sous la photo (la photo finit à 436 px, le trait est à 506 px) */

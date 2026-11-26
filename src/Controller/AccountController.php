@@ -29,7 +29,8 @@ final class AccountController extends AbstractController
     }
 
     /**
-     * Traite le formulaire "Vos informations personnelles" : pseudo, email et mot de passe (facultatif).
+     * Traite le formulaire "Vos informations personnelles" : pseudo, email, mot de passe (facultatif)
+     * et nouvelle photo de profil (facultative). Un seul bouton "Enregistrer" valide le tout.
      */
     public function updateProfile(): void
     {
@@ -66,6 +67,20 @@ final class AccountController extends AbstractController
             return;
         }
 
+        // Photo de profil : null quand le membre n'a pas choisi de nouvelle image
+        $uploader = $this->createImageUploader();
+
+        try {
+            $newAvatar = $uploader->upload($this->readUploadedFile('avatar'), 'avatars');
+        } catch (InvalidArgumentException $exception) {
+            $this->renderAccountPage($user, ['avatar' => $exception->getMessage()], $username, $email);
+
+            return;
+        }
+
+        $hasNewAvatar = is_string($newAvatar);
+        $previousAvatar = $user->getAvatar();
+
         $user->setUsername($username);
         $user->setEmail($email);
 
@@ -75,7 +90,16 @@ final class AccountController extends AbstractController
 
         try {
             $userManager->update($user);
+
+            if ($hasNewAvatar) {
+                $userManager->updateAvatar($user->getId(), $newAvatar);
+            }
         } catch (PDOException $exception) {
+            // La nouvelle photo n'est pas gardée si rien n'a pu être enregistré
+            if ($hasNewAvatar) {
+                $uploader->delete('avatars', $newAvatar);
+            }
+
             // Code 23000 : le pseudo ou l'email vient d'être pris par un autre membre
             if ((string) $exception->getCode() === '23000') {
                 $errors = ['email' => 'Ce pseudo ou cette adresse email est déjà utilisé.'];
@@ -87,37 +111,12 @@ final class AccountController extends AbstractController
             throw $exception;
         }
 
-        Session::addFlash('success', 'Vos informations ont bien été enregistrées.');
-        $this->redirect('/account');
-    }
-
-    /**
-     * Traite le formulaire de la photo de profil.
-     */
-    public function updateAvatar(): void
-    {
-        $user = $this->requireLogin();
-        $uploader = $this->createImageUploader();
-
-        try {
-            $avatar = $uploader->upload($this->readUploadedFile('avatar'), 'avatars');
-        } catch (InvalidArgumentException $exception) {
-            Session::addFlash('error', $exception->getMessage());
-            $this->redirect('/account');
-        }
-
-        if ($avatar === null) {
-            Session::addFlash('error', 'Veuillez choisir une image.');
-            $this->redirect('/account');
-        }
-
-        $previousAvatar = $user->getAvatar();
-        (new UserManager())->updateAvatar($user->getId(), $avatar);
-
         // L'ancienne photo n'est plus utilisée : on la supprime du serveur
-        $uploader->delete('avatars', $previousAvatar);
+        if ($hasNewAvatar) {
+            $uploader->delete('avatars', $previousAvatar);
+        }
 
-        Session::addFlash('success', 'Votre photo de profil a bien été mise à jour.');
+        Session::addFlash('success', 'Vos informations ont bien été enregistrées.');
         $this->redirect('/account');
     }
 

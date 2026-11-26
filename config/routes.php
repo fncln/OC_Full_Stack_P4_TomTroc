@@ -34,5 +34,4 @@ return [
     ['POST', '/logout', AuthController::class, 'logout'],
     ['GET', '/account', AccountController::class, 'index'],
     ['POST', '/account/profile', AccountController::class, 'updateProfile'],
-    ['POST', '/account/avatar', AccountController::class, 'updateAvatar'],
 ];
