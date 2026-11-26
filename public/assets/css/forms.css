@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Tom Troc - formulaires, messages d'alerte, liens soulignés, cartes
+   Mesures issues de la maquette (version desktop, 1440 px).
+   ========================================================================== */
+
+:root {
+    --color-field: #edf2f6;     /* fond des champs posés sur une carte blanche */
+    --color-border: #f0f0f0;    /* contour des champs et traits entre deux lignes */
+    --color-danger: #cb2d2d;    /* lien "Supprimer" et messages d'erreur */
+}
+
+/* ---- Champ : libellé gris au-dessus, champ de 50 px de haut --------------- */
+
+/* 32 px entre la fin d'un champ et le libellé suivant */
+.form__group + .form__group {
+    margin-top: 32px;
+}
+
+/* Libellé : Inter Regular 14 px, gris, à 10 px au-dessus du champ */
+.form__label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 17px;
+}
+
+/* Champ : 50 px de haut, coins arrondis de 6 px, texte à 14 px du bord */
+.form__input,
+.form__select,
+.form__textarea {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 0 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    font-family: var(--font-text);
+    font-size: 0.875rem;
+    line-height: 17px;
+}
+
+.form__input::placeholder,
+.form__textarea::placeholder {
+    color: var(--color-muted);
+}
+
+/* Sur une carte blanche, les champs sont gris-bleu clair */
+.card .form__input,
+.book-form .form__input,
+.book-form .form__select,
+.book-form .form__textarea {
+    background-color: var(--color-field);
+}
+
+.form__input[aria-invalid="true"],
+.form__select[aria-invalid="true"],
+.form__textarea[aria-invalid="true"] {
+    border-color: var(--color-danger);
+}
+
+/* Zone de texte (commentaire d'un livre) : 356 px de haut */
+.form__textarea {
+    height: auto;
+    min-height: 356px;
+    padding: 16px 14px;
+    resize: vertical;
+}
+
+/* Liste déroulante : flèche à 24 px du bord droit */
+.form__select {
+    padding-right: 50px;
+    background-image: url("../img/icon-chevron.svg");
+    background-repeat: no-repeat;
+    background-position: right 24px center;
+    background-size: 14px 7px;
+    appearance: none;
+}
+
+/* Aide et erreur sous un champ : Inter Regular 12 px */
+.form__hint,
+.form__error {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    line-height: 15px;
+}
+
+.form__hint {
+    color: var(--color-muted);
+}
+
+.form__error {
+    color: var(--color-danger);
+}
+
+/* ---- Messages d'alerte (erreur de connexion, confirmation...) --------------- */
+
+.flashes {
+    padding-top: 24px;
+}
+
+.flashes .alert + .alert {
+    margin-top: 12px;
+}
+
+.alert {
+    padding: 14px 18px;
+    border: 1px solid;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    line-height: 17px;
+}
+
+.alert--error {
+    border-color: var(--color-danger);
+    background-color: #fdf0f0;
+    color: #9c2020;
+}
+
+.alert--success {
+    border-color: var(--color-green);
+    background-color: #e8f6ef;
+    color: var(--color-green-dark);
+}
+
+/* ---- Lien souligné ("Éditer", "Supprimer", "Inscrivez-vous") ---------------- */
+
+.link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+}
+
+.link:hover {
+    text-decoration-thickness: 2px;
+}
+
+.link--danger {
+    color: var(--color-danger);
+}
+
+/* ---- Carte blanche aux coins arrondis de 20 px ------------------------------ */
+
+.card {
+    border-radius: 20px;
+    background-color: var(--color-white);
+}
+
+/* ---- Photo de profil ronde --------------------------------------------------- */
+
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/buttons.css')) ?>">
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/home.css')) ?>">
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/book-detail.css')) ?>">
+    <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/forms.css')) ?>">
 </head>
 <body>
 <a class="skip-link" href="#content">Aller au contenu</a>
