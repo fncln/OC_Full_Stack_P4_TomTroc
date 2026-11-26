@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Tom Troc - ajout et modification d'un livre, suppression (version desktop)
+   Grande carte blanche de 1140 px : photo de 488 px à gauche, champs de 435 px à droite.
+   ========================================================================== */
+
+.book-form-page {
+    padding: 40px 0 80px;
+}
+
+/* "← retour" : Inter Regular 14 px, gris, flèche de 9 x 8 px à 3 px du texte */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 17px;
+    text-decoration: none;
+}
+
+.back-link::before {
+    content: "";
+    width: 9px;
+    height: 8px;
+    background: url("../img/icon-arrow-back.svg") no-repeat center / contain;
+}
+
+/* Le "←" écrit dans la page est remplacé par l'icône de la maquette */
+.back-link [aria-hidden="true"] {
+    display: none;
+}
+
+.book-form-page .page-title {
+    margin-top: 23px;
+}
+
+.book-form {
+    display: grid;
+    grid-template-columns: 488fr 435fr;
+    gap: 118px;
+    margin-top: 24px;
+    padding: 56px 50px 68px;
+    border-radius: 20px;
+    background-color: var(--color-white);
+}
+
+/* ---- Colonne de gauche : photo ---------------------------------------------- */
+
+.book-form__photo .form__label {
+    margin-bottom: 10px;
+}
+
+/* Photo carrée de 488 px */
+.book-form__cover {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+/* "Modifier la photo" : souligné, 12 px, aligné à droite sous la photo */
+.book-form__photo .link {
+    display: block;
+    margin-top: 23px;
+    font-size: 0.75rem;
+    text-align: right;
+}
+
+.book-form__photo input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.book-form__photo .form__hint {
+    text-align: right;
+}
+
+/* ---- Colonne de droite : champs et bouton "Valider" de 322 px ------------------ */
+
+.book-form__fields .btn {
+    width: 322px;
+    max-width: 100%;
+    margin-top: 44px;
+}
+
+/* ---- Page "Supprimer ce livre" (pas de maquette : même style que le formulaire) -- */
+
+.book-delete {
+    padding: 90px 0 80px;
+}
+
+.book-delete__text {
+    max-width: 560px;
+    margin-top: 24px;
+    font-size: 1rem;
+    line-height: 24px;
+}
+
+.book-delete__form {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+}
