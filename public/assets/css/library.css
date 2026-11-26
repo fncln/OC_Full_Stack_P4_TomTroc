@@ -128,3 +128,12 @@
     display: flex;
     gap: 30px;
 }
+
+/* Étiquette "disponible" / "non dispo." dans le tableau : plus petite que sur les cartes
+   (Inter Medium 8,9 px, 13 px de marge sur les côtés) */
+.table .tag {
+    padding: 3.7px 13.3px;
+    font-size: 0.5547rem;
+    font-weight: 500;
+    line-height: normal;
+}
