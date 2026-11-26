@@ -7,8 +7,8 @@
 .auth {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* De la fin du header au début du footer */
-    min-height: max(700px, calc(100vh - var(--header-height) - var(--footer-height)));
+    /* 886 px entre le header et le footer sur la maquette ; plus haut si la fenêtre l'est */
+    min-height: max(886px, calc(100vh - var(--header-height) - var(--footer-height)));
 }
 
 /* La marge de gauche suit celle du contenu centré de 1140 px */

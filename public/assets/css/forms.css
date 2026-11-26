@@ -91,6 +91,17 @@
     color: var(--color-muted);
 }
 
+/* L'aide d'un champ se place dans l'écart de 32 px avant le champ suivant : la hauteur de la maquette est gardée */
+.form__group {
+    position: relative;
+}
+
+.form__group > .form__hint {
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
 .form__error {
     color: var(--color-danger);
 }

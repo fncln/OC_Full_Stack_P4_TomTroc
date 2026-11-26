@@ -4,7 +4,7 @@
    ========================================================================== */
 
 .book-detail__owner-label {
-    margin-top: 40px;
+    margin-top: 32px;
 }
 
 /* Pastille blanche : photo de 48 px, pseudo à 12 px, coins très arrondis */
@@ -38,5 +38,5 @@
 /* Bouton vert sur toute la largeur de la colonne */
 .book-detail__content > .btn {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 80px;
 }

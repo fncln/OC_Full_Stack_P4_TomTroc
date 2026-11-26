@@ -13,6 +13,8 @@
 
 .member .profile-card {
     min-height: 579px;
+    /* Le bouton se termine à 56 px du bas de la carte */
+    padding-bottom: 56px;
 }
 
 /* Le bouton "Écrire un message" est en bas de la carte, 215 px de large */

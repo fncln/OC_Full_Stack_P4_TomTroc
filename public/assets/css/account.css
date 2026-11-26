@@ -5,7 +5,8 @@
    ========================================================================== */
 
 .account {
-    padding: 90px 0 60px;
+    /* 15 px sous le bouton "Ajouter un livre" : le footer commence à 1476 px sur la maquette */
+    padding: 90px 0 15px;
 }
 
 /* Titre de la page : Playfair Display Regular 26 px */
@@ -18,8 +19,8 @@
 
 .account__top {
     display: grid;
-    grid-template-columns: 547fr 555fr;
-    gap: 38px;
+    grid-template-columns: 547px 555px;
+    gap: 33px;
     margin: 49px 0 32px;
 }
 
@@ -102,7 +103,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-top: 6px;
+    margin-top: 4px;
     font-size: 0.875rem;
     line-height: 17px;
 }

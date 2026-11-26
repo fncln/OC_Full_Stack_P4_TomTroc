@@ -9,10 +9,10 @@
     flex-direction: column;
 }
 
-/* Bouton "Ajouter un livre" : au-dessus du tableau, à droite */
+/* Bouton "Ajouter un livre" : sous le tableau, à droite (la maquette n'a pas de bouton : le tableau reste à sa place) */
 .library__add {
     align-self: flex-end;
-    margin-bottom: 16px;
+    margin-top: 24px;
 }
 
 .library__empty {
@@ -44,7 +44,8 @@
 /* ---- En-tête : Inter SemiBold 8 px en majuscules, espacement des lettres de 8 % -- */
 
 .table th {
-    padding: 33px 0 9px;
+    /* En-tête de 61 px : la première ligne commence à 854 px de la carte, comme sur la maquette */
+    padding: 33px 0 17px;
     color: var(--color-text);
     font-size: 0.5rem;
     font-weight: 600;
@@ -89,8 +90,9 @@
     padding-left: 66px;
 }
 
-.table tbody tr {
-    border-top: 1px solid var(--color-border);
+/* Trait fin en haut de chaque ligne, dessiné à l'intérieur pour ne pas changer la hauteur de 130 px */
+.table tbody td {
+    box-shadow: inset 0 1px 0 var(--color-border);
 }
 
 .table tbody tr:nth-child(even) {

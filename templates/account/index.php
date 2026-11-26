@@ -78,7 +78,7 @@ $bookCount = count($books);
 
     <section class="library" aria-labelledby="library-title">
         <h2 class="sr-only" id="library-title">Ma bibliothèque</h2>
-        <a class="btn btn--primary library__add" href="<?= $this->escape($this->url('/books/new')) ?>">Ajouter un livre</a>
         <?php $this->partial('library-table', ['books' => $books, 'manage' => true]) ?>
+        <a class="btn btn--primary library__add" href="<?= $this->escape($this->url('/books/new')) ?>">Ajouter un livre</a>
     </section>
 </div>
