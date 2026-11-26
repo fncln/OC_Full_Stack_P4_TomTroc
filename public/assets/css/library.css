@@ -1,0 +1,130 @@
+/* ==========================================================================
+   Tom Troc - tableau de la bibliothèque (page "Mon compte" et profil public)
+   Mesures de la maquette : lignes de 130 px, photo de 78 px, première colonne
+   alignée à 66 px du bord de la carte.
+   ========================================================================== */
+
+.library {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bouton "Ajouter un livre" : au-dessus du tableau, à droite */
+.library__add {
+    align-self: flex-end;
+    margin-bottom: 16px;
+}
+
+.library__empty {
+    padding: 48px 24px;
+    border-radius: 20px;
+    background-color: var(--color-white);
+    color: var(--color-muted);
+    text-align: center;
+}
+
+/* ---- Carte blanche autour du tableau ----------------------------------------- */
+
+.table-card {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: var(--color-white);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 0.75rem;
+    line-height: 15px;
+    text-align: left;
+}
+
+/* ---- En-tête : Inter SemiBold 8 px en majuscules, espacement des lettres de 8 % -- */
+
+.table th {
+    padding: 33px 0 9px;
+    color: var(--color-text);
+    font-size: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 11px;
+    text-transform: uppercase;
+    vertical-align: top;
+}
+
+/* Largeurs des colonnes (carte de 1140 px). La description prend la place restante. */
+.table--library th:nth-child(1) {
+    width: 224px;
+    padding-left: 66px;
+}
+
+.table--library th:nth-child(2) {
+    width: 181px;
+}
+
+.table--library th:nth-child(3) {
+    width: 175px;
+}
+
+.table--library th:nth-child(5) {
+    width: 146px;
+}
+
+.table--library th:nth-child(6) {
+    width: 201px;
+}
+
+/* ---- Lignes : 130 px de haut, une sur deux grise ----------------------------- */
+
+.table td {
+    height: 130px;
+    padding: 0 16px 0 0;
+    color: var(--color-text);
+    vertical-align: middle;
+}
+
+.table td:first-child {
+    padding-left: 66px;
+}
+
+.table tbody tr {
+    border-top: 1px solid var(--color-border);
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: var(--color-field);
+}
+
+.table__cover {
+    width: 78px;
+    height: 78px;
+    object-fit: cover;
+}
+
+.table__link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.table__link:hover {
+    text-decoration: underline;
+}
+
+/* Description : Inter Italic 12 px, 128 px de large, 4 lignes au maximum puis "…" */
+.table__description {
+    display: -webkit-box;
+    max-width: 128px;
+    overflow: hidden;
+    font-style: italic;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+}
+
+/* "Éditer" puis "Supprimer", 30 px entre les deux */
+.table__actions {
+    display: flex;
+    gap: 30px;
+}
