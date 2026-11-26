@@ -53,7 +53,7 @@ if ($hasError) {
 <?php endif; ?>
 <?php if ($isRequired) : ?>
            required>
-<?php endif; ?>>
+<?php endif; ?>
 <?php if ($hasHint) : ?>
     <p class="form__hint" id="<?= $this->escape($id) ?>-hint"><?= $this->escape($hintMessage) ?></p>
 <?php endif; ?>
