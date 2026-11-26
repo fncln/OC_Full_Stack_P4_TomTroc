@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Tom Troc - page "Mon compte" (version desktop)
+   Carte du profil (547 px) et carte des informations (555 px) côte à côte,
+   tableau de la bibliothèque dessous.
+   ========================================================================== */
+
+.account {
+    padding: 90px 0 60px;
+}
+
+/* Titre de la page : Playfair Display Regular 26 px */
+.account .page-title,
+.book-form-page .page-title,
+.book-delete .page-title {
+    font-size: 1.625rem;
+    line-height: 34px;
+}
+
+.account__top {
+    display: grid;
+    grid-template-columns: 547fr 555fr;
+    gap: 38px;
+    margin: 49px 0 32px;
+}
+
+/* ---- Carte du profil (partagée avec le profil public) ------------------------ */
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 508px;
+    padding: 48px 24px;
+    text-align: center;
+}
+
+.profile-card__avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-card__avatar .avatar {
+    width: 135px;
+    height: 135px;
+}
+
+/* "modifier" : Inter Regular 14 px, gris, souligné, à 5 px de la photo */
+.profile-card__edit {
+    margin-top: 5px;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Le champ fichier reste utilisable au clavier mais se cache : le texte "modifier" le remplace */
+.profile-card__avatar input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+/* Le choix du fichier doit être validé : petit bouton sous le lien */
+.profile-card__submit {
+    min-height: 40px;
+    margin-top: 12px;
+    padding: 0 20px;
+    font-size: 0.875rem;
+}
+
+/* Trait de 242 px, à 70 px sous la photo (la photo finit à 436 px, le trait est à 506 px) */
+.profile-card__rule {
+    width: 242px;
+    height: 0;
+    margin: 48px 0;
+    border: 0;
+    border-top: 1px solid var(--color-muted);
+}
+
+/* Pseudo : Playfair Display Regular 24 px */
+.profile-card__name {
+    color: var(--color-text);
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+.profile-card__since {
+    margin-top: 11px;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 17px;
+}
+
+/* "BIBLIOTHEQUE" : Inter SemiBold 8 px, espacement des lettres de 8 % */
+.profile-card .label-title {
+    margin-top: 21px;
+    font-size: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 11px;
+}
+
+/* Petite icône de livres devant "4 livres" */
+.profile-card__count {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 0.875rem;
+    line-height: 17px;
+}
+
+.profile-card__count::before {
+    content: "";
+    width: 10.4px;
+    height: 13.7px;
+    background: url("../img/icon-library.svg") no-repeat center / contain;
+}
+
+/* ---- Carte "Vos informations personnelles" ------------------------------------ */
+
+/* Formulaire de 322 px, 117 px du bord gauche de la carte */
+.account-card {
+    min-height: 508px;
+    padding: 36px 117px;
+}
+
+/* Titre : Inter Regular 16 px, à 26 px du premier libellé */
+.account-form__title {
+    margin-bottom: 26px;
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 19px;
+}
+
+.account-form .btn {
+    margin-top: 32px;
+}
+
+/* ---- Bibliothèque -------------------------------------------------------------- */
+/* Le tableau et le bouton "Ajouter un livre" sont dans library.css */
