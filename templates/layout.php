@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/account.css')) ?>">
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/member.css')) ?>">
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/book-form.css')) ?>">
+    <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/book-owner.css')) ?>">
 
 </head>
 <body>

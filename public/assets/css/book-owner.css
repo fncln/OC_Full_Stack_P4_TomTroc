@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Tom Troc - propriétaire du livre et bouton "Envoyer un message" (page d'un livre)
+   Colonne de texte de 485 px.
+   ========================================================================== */
+
+.book-detail__owner-label {
+    margin-top: 40px;
+}
+
+/* Pastille blanche : photo de 48 px, pseudo à 12 px, coins très arrondis */
+.owner-chip {
+    margin-top: 16px;
+}
+
+.owner-chip__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 17px 6px 6px;
+    border-radius: 114px;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+
+.owner-chip__link:hover .owner-chip__name {
+    text-decoration: underline;
+}
+
+.owner-chip__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Bouton vert sur toute la largeur de la colonne */
+.book-detail__content > .btn {
+    width: 100%;
+    margin-top: 40px;
+}
