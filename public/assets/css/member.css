@@ -1,0 +1,30 @@
+/* ==========================================================================
+   Tom Troc - profil public d'un membre (version desktop)
+   Carte du membre (341 px) à gauche, sa bibliothèque (771 px) à droite,
+   579 px de haut, à 103 px sous le header.
+   ========================================================================== */
+
+.member {
+    display: grid;
+    grid-template-columns: 341px 1fr;
+    gap: 28px;
+    padding: 103px 0 80px;
+}
+
+.member .profile-card {
+    min-height: 579px;
+}
+
+/* Le bouton "Écrire un message" est en bas de la carte, 215 px de large */
+.member .profile-card .btn {
+    margin-top: auto;
+}
+
+.member .library {
+    min-width: 0;
+}
+
+/* Sans les colonnes "Disponibilité" et "Action", la description prend la fin de la carte */
+.member .table-card {
+    min-height: 579px;
+}

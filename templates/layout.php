@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/auth.css')) ?>">
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/library.css')) ?>">
     <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/account.css')) ?>">
+    <link rel="stylesheet" href="<?= $this->escape($this->url('/assets/css/member.css')) ?>">
+
 </head>
 <body>
 <a class="skip-link" href="#content">Aller au contenu</a>
