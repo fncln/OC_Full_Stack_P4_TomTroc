@@ -31,8 +31,8 @@
 .site-nav__list {
     display: flex;
     align-items: center;
-    /* Écart de 47 px entre deux liens */
-    gap: 47px;
+    /* Écart de 44 px entre deux liens (de la fin d'un texte au début du suivant) */
+    gap: 44px;
 }
 
 .site-nav__link {
@@ -90,6 +90,8 @@
 
 /* Trait vertical gris clair (19 px de haut), puis 58 px avant le lien */
 .site-nav__list--member {
+    /* 58 px entre les liens du membre (le plus grand écart de la maquette) */
+    gap: 58px;
     margin-left: auto;
     padding: 1px 0 1px 58px;
     border-left: 1px solid #e5e3e0;

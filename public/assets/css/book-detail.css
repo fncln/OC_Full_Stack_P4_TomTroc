@@ -67,8 +67,8 @@
 /* Le texte reste dans la colonne de droite, même si le livre n'a pas de photo */
 .book-detail__content {
     grid-column: 2;
-    /* 59 px sous le fil d'Ariane, 85 px à gauche, 150 px à droite, 80 px en bas */
-    padding: 59px 150px 80px 85px;
+    /* 59 px sous le fil d'Ariane, 85 px à gauche, 80 px en bas, à droite la marge du contenu centré (150 px sur 1440 px) */
+    padding: 59px max(24px, calc((100vw - var(--container-width)) / 2)) 80px 85px;
 }
 
 /* Titre : Playfair Display Regular 36 px, noir */
