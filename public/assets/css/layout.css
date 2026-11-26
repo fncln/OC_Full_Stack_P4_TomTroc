@@ -47,9 +47,9 @@
     text-underline-offset: 4px;
 }
 
-/* Lien de la page affichée : en gras */
+/* Lien de la page affichée : Inter SemiBold */
 .site-nav__link.is-active {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 /* ---- Footer ------------------------------------------------------------- */
@@ -79,7 +79,7 @@
 }
 
 
-/* ---- Liens du membre (Connexion ou Déconnexion) ---------------------------- */
+/* ---- Liens du membre (Messagerie, Mon compte, Déconnexion ou Connexion) ----- */
 
 /* Le menu occupe la place restante : le groupe du membre est poussé à droite */
 .site-nav {
@@ -111,3 +111,53 @@
     margin: 0;
 }
 
+/* ---- Icônes devant "Messagerie" et "Mon compte" ------------------------------ */
+
+.site-nav__link--messages,
+.site-nav__link--account {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* L'icône est une image décorative d'arrière-plan : le texte du lien suffit aux lecteurs d'écran */
+.site-nav__link--messages::before,
+.site-nav__link--account::before {
+    content: "";
+    flex-shrink: 0;
+    background: no-repeat center / contain;
+}
+
+/* Bulle de message : 15 x 14 px, à 4 px du texte */
+.site-nav__link--messages::before {
+    width: 15px;
+    height: 14px;
+    margin-right: 4px;
+    background-image: url("../img/icon-messagerie.svg");
+}
+
+/* Silhouette : 10 x 13 px, à 5 px du texte */
+.site-nav__link--account::before {
+    width: 10px;
+    height: 13px;
+    margin-right: 5px;
+    background-image: url("../img/icon-account.svg");
+}
+
+/* ---- Pastille du nombre de messages non lus --------------------------------- */
+
+/* Pastille gris foncé de 15 px de haut, chiffre Inter Bold 8,25 px de la couleur du header */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 10.5px;
+    height: 15px;
+    margin-left: 5px;
+    padding: 0 3px;
+    border-radius: 6.75px;
+    background-color: var(--color-text);
+    color: var(--color-header);
+    font-size: 0.515625rem;
+    font-weight: 700;
+    line-height: 1;
+}

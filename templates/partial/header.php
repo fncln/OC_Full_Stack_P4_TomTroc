@@ -36,13 +36,13 @@
                 </li>
 <?php else : ?>
                 <li>
-                    <a class="site-nav__link<?= $activePage === 'messages' ? ' is-active' : '' ?>"
+                    <a class="site-nav__link site-nav__link--messages<?= $activePage === 'messages' ? ' is-active' : '' ?>"
                        href="<?= $this->escape($this->url('/messages')) ?>"
                        <?= $activePage === 'messages' ? 'aria-current="page"' : '' ?>>Messagerie<?php if ($unreadCount > 0) : ?>
  <span class="badge"><?= $this->escape($unreadCount) ?><span class="sr-only"> message<?= $unreadCount > 1 ? 's' : '' ?> non lu<?= $unreadCount > 1 ? 's' : '' ?></span></span><?php endif; ?></a>
                 </li>
                 <li>
-                    <a class="site-nav__link<?= $activePage === 'account' ? ' is-active' : '' ?>"
+                    <a class="site-nav__link site-nav__link--account<?= $activePage === 'account' ? ' is-active' : '' ?>"
                        href="<?= $this->escape($this->url('/account')) ?>"
                        <?= $activePage === 'account' ? 'aria-current="page"' : '' ?>>Mon compte</a>
                 </li>
