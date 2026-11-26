@@ -87,7 +87,7 @@
 
 /* Début du message : Inter Regular 12 px, gris, sur une seule ligne */
 .conversation__preview {
-    grid-column: 1 / -1;
+    grid-column: span 2;
     overflow: hidden;
     color: var(--color-muted);
     font-size: 0.75rem;
@@ -129,14 +129,16 @@
 
 .thread__empty {
     margin-top: 24px;
+    margin-bottom: auto;
     padding: 0;
 }
 
+/* Comme dans une boîte de dialogue : les messages sont collés en bas, juste au-dessus du champ */
 .thread__messages {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    margin-top: 32px;
+    margin-top: auto;
 }
 
 /* ---- Messages : bulles de 500 px au maximum ------------------------------------- */
@@ -198,8 +200,230 @@
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 21px;
+    /* 98 px entre le dernier message et le champ (comme entre le champ et le bas de la page) */
+    margin-top: 98px;
+}
+
+.thread__input {
+    flex: 1;
+    height: 49px;
+    padding: 15px 42px;
+    resize: none;
+}
+
+.thread__form .btn {
+    min-height: 49px;
+    padding: 0 38px;
+}
+
+.thread__form .form__error {
+    flex-basis: 100%;
+    margin-top: 0;
+}
+/* ==========================================================================
+   Tom Troc - messagerie (version desktop)
+   Liste des conversations (308 px, fond clair) à gauche, fil de discussion à droite
+   (de 502 px à 1290 px sur la maquette de 1440 px). Hauteur de 893 px.
+   ========================================================================== */
+
+/* Toute la page est de la couleur du header, seule la liste est plus claire */
+.main:has(.messaging) {
+    background-color: var(--color-header);
+}
+
+.messaging {
+    display: flex;
+    min-height: 893px;
+}
+
+/* ---- Liste des conversations -------------------------------------------------- */
+
+.messaging__list {
+    flex: 0 0 308px;
+    padding-top: 55px;
+    background-color: var(--color-page);
+}
+
+/* Titre : Playfair Display Regular 26 px, à 34 px du bord */
+.messaging__title {
+    margin: 0 0 28px 34px;
+    color: var(--color-black);
+    font-family: var(--font-title);
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 34px;
+}
+
+.messaging__empty,
+.thread__empty {
+    padding: 0 34px;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+}
+
+/* Une conversation : 84 px de haut, la conversation ouverte est sur fond blanc */
+.conversation {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 84px;
+    padding: 0 42px 0 34px;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.conversation-list__item.is-active .conversation {
+    background-color: var(--color-white);
+}
+
+.conversation:hover .conversation__name {
+    text-decoration: underline;
+}
+
+.conversation__avatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Pseudo à gauche, heure à droite, début du message en dessous (172 px) */
+.conversation__body {
+    display: grid;
+    flex: 0 1 172px;
+    grid-template-columns: 1fr auto;
+    gap: 7px 8px;
+    min-width: 0;
+}
+
+.conversation__name {
+    font-size: 0.875rem;
+    line-height: 17px;
+}
+
+.conversation__date {
+    font-size: 0.75rem;
+    line-height: 17px;
+}
+
+/* Début du message : Inter Regular 12 px, gris, sur une seule ligne */
+.conversation__preview {
+    grid-column: span 2;
+    overflow: hidden;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    line-height: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---- Fil de discussion ----------------------------------------------------------- */
+
+.thread {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    padding: 35px 0 98px 44px;
+}
+
+/* Photo de 48 px et pseudo Inter SemiBold 14 px à 12 px */
+.thread__contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.thread__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.thread__name {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.thread__empty {
+    margin-top: 24px;
+    margin-bottom: auto;
+    padding: 0;
+}
+
+/* Comme dans une boîte de dialogue : les messages sont collés en bas, juste au-dessus du champ */
+.thread__messages {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
     margin-top: auto;
-    padding-top: 40px;
+}
+
+/* ---- Messages : bulles de 500 px au maximum ------------------------------------- */
+
+.message {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Reçu : à gauche, sur fond blanc. Envoyé : à droite, sur fond gris-bleu. */
+.message--received {
+    align-items: flex-start;
+}
+
+.message--sent {
+    align-items: flex-end;
+}
+
+/* Heure (et petite photo pour un message reçu) : Inter Regular 12 px, grise */
+.message__meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    line-height: 15px;
+}
+
+.message__avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message__content {
+    max-width: 500px;
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: var(--color-text);
+    font-size: 0.75rem;
+    line-height: 17px;
+    overflow-wrap: anywhere;
+}
+
+.message--received .message__content {
+    background-color: var(--color-white);
+}
+
+.message--sent .message__content {
+    background-color: var(--color-field);
+}
+
+/* ---- Formulaire : champ de 49 px et bouton "Envoyer" de 132 px ----------------------- */
+
+.thread__form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 21px;
+    /* 98 px entre le dernier message et le champ (comme entre le champ et le bas de la page) */
+    margin-top: 98px;
 }
 
 .thread__input {
