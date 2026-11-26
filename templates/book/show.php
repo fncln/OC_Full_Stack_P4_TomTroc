@@ -1,6 +1,7 @@
 <?php
 /**
  * Page d'un livre : image, titre, auteur et description.
+ * Un livre sans photo affiche l'image par défaut (assets/img/book-placeholder.svg).
  * Le nom du propriétaire est un lien vers son profil public, avec un lien pour lui envoyer un message.
  *
  * @var App\Core\View $this
@@ -16,13 +17,11 @@
     </nav>
 </div>
 <article class="book-detail">
-<?php if ($book->hasImage()) : ?>
     <div class="book-detail__media">
         <img class="book-detail__image"
-             src="<?= $this->escape($this->url('/uploads/books/' . $book->getImage())) ?>"
-             width="720" height="720" alt="Couverture du livre <?= $this->escape($book->getTitle()) ?>">
+             src="<?= $this->escape($this->bookImageUrl($book->getImage())) ?>"
+             width="720" height="863" alt="<?= $book->hasImage() ? 'Couverture du livre' . $this->escape($book->getTitle()) : '' ?>">
     </div>
-<?php endif; ?>
     <div class="book-detail__content">
         <h1 class="book-detail__title"><?= $this->escape($book->getTitle()) ?></h1>
         <p class="book-detail__author">par <?= $this->escape($book->getAuthor()) ?></p>

@@ -2,6 +2,7 @@
 /**
  * Carte d'un livre : image, étiquette "non dispo.", titre et auteur.
  * Utilisée sur la page d'accueil et sur la page "Nos livres à l'échange".
+ * Un livre sans photo affiche l'image par défaut (assets/img/book-placeholder.svg).
  *
  * @var App\Core\View $this
  * @var App\Entity\Book $book
@@ -9,11 +10,9 @@
  */
 ?>
 <article class="book-card">
-<?php if ($book->hasImage()) : ?>
     <img class="book-card__image"
-         src="<?= $this->escape($this->url('/uploads/books/' . $book->getImage())) ?>"
+         src="<?= $this->escape($this->bookImageUrl($book->getImage())) ?>"
          width="400" height="400" alt="">
-<?php endif; ?>
 <?php if ($book->isUnavailable()) : ?>
     <span class="tag tag--unavailable book-card__tag">non dispo.</span>
 <?php endif; ?>
